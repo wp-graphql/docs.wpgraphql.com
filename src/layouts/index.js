@@ -4,7 +4,12 @@ import SiteHeader from '../components/SiteHeader'
 import Helmet from 'react-helmet'
 import { Layout } from 'antd'
 
-import '../styles.css'
+if (
+  process.env.NODE_ENV === `development` ||
+  (process.env.NODE_ENV === `production` && process.browser !== true)
+) {
+  require('../styles.css')
+}
 
 const TemplateWrapper = ({ children }) => (
   <Layout>

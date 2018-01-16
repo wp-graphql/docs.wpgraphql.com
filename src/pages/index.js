@@ -34,12 +34,9 @@ function Product({ hit }) {
 const IndexPage = () => (
   <HomePageHero>
     <div>
-      <h1>Goo</h1>
-      <p>Welcome to your new Gatsby site.</p>
-      <p>Now go build something great.</p>
-      <Button type="primary">
-        <Link to="/about">Go to page 2</Link>
-      </Button>
+      <h1>Bringing the power of GraphQL to WordPress</h1>
+      <h3>WPGraphQL is a free open-source WordPress plugin that adds a GraphQL API to your WordPress site</h3>
+      <Button type=""><Link to="/getting-started/about" >Learn more</Link></Button>
     </div>
   </HomePageHero>
 )
