@@ -33,7 +33,8 @@
     "react-particles-js": "^2.1.0",
     "react-split-pane": "^0.1.74",
     "styled-components": "^2.4.0",
-    "styled-jsx": "^2.2.1"
+    "styled-jsx": "^2.2.1",
+    "xmldom": "git+https://github.com/timsuchanek/xmldom#node-list"
   },
   "keywords": [
     "gatsby",
@@ -51,7 +52,6 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
-    "prettier": "^1.9.2",
-    "xmldom": "git+https://github.com/timsuchanek/xmldom#node-list"
+    "prettier": "^1.9.2"
   }
 }
