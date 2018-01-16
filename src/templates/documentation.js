@@ -3,10 +3,10 @@ import SidebarNav from '../components/SidebarNav'
 import { Layout } from 'antd'
 import Link from 'gatsby-link'
 import styled from 'styled-components'
-import JsxParser from 'react-jsx-parser'
-
-const Playground = ({children}) => <div className="gatsby-highlight"><pre className="language-graphql">{children}</pre></div>;
-const Tip = () => <div className="tip-yo">Yo dawg</div>;
+// import JsxParser from 'react-jsx-parser'
+//
+// const Playground = ({children}) => <div className="gatsby-highlight"><pre className="language-graphql">{children}</pre></div>;
+// const Tip = () => <div className="tip-yo">Yo dawg</div>;
 
 const { Content } = Layout
 
@@ -70,7 +70,7 @@ class DocumentationTemplate extends React.Component {
           <Content style={{ background: '#fff', padding: 24, margin: "24px 0px 0px 0px" }}>
             <h1>{doc.frontmatter.title}</h1>
             <div dangerouslySetInnerHTML={{ __html: doc.html }} />
-            
+
           </Content>
           <DocFooter next={next} prev={prev} />
         </Layout>
