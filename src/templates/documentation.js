@@ -4,9 +4,6 @@ import { Layout } from 'antd'
 import Link from 'gatsby-link'
 import styled from 'styled-components'
 import JsxParser from 'react-jsx-parser'
-import { CustomGraphiQL } from 'graphcool-graphiql'
-
-const fetcher = () => {};
 
 const Playground = ({children}) => <div className="gatsby-highlight"><pre className="language-graphql">{children}</pre></div>;
 const Tip = () => <div className="tip-yo">Yo dawg</div>;
@@ -92,7 +89,7 @@ class DocumentationTemplate extends React.Component {
 export default DocumentationTemplate
 
 export const pageQuery = graphql`
-    query BlogPostByPath($path: String!) {
+    query DocumentByPath($path: String!) {
         markdownRemark(frontmatter: { path: { eq: $path } }) {
             html
             frontmatter {
