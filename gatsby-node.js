@@ -113,11 +113,11 @@ function addNavItem( obj, i ){
         title: capitalize(splitpath[i]),
         name: splitpath[i],
         type: 'directory',
-        path: obj.node.frontmatter.path
+        path: '/' + obj.node.frontmatter.path
       };
       if (i == splitpath.length - 1) {
         node.title = capitalize(obj.node.frontmatter.title);
-        node.path = obj.node.frontmatter.path ? obj.node.frontmatter.path : '/';
+        node.path = obj.node.frontmatter.path ? '/' + obj.node.frontmatter.path : '/';
         node.description = obj.node.frontmatter.description;
         node.type = 'page';
       }

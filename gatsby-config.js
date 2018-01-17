@@ -2,6 +2,7 @@ module.exports = {
   siteMetadata: {
     title: `WPGraphQL Docs`
   },
+  pathPrefix: "/wpgraphql.com",
   plugins: [
     `gatsby-plugin-antd`,
     `gatsby-plugin-catch-links`,
