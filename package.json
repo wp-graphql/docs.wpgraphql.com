@@ -26,14 +26,9 @@
     "gatsby-remark-smartypants": "^1.4.10",
     "gatsby-source-filesystem": "^1.5.11",
     "gatsby-transformer-remark": "^1.7.26",
-    "graphcool-graphiql": "^1.8.13",
-    "graphcool-styles": "^0.2.5",
     "react-instantsearch": "^4.4.0",
     "react-jsx-parser": "git+https://github.com/timsuchanek/react-jsx-parser#components-object3",
-    "react-particles-js": "^2.1.0",
-    "react-split-pane": "^0.1.74",
     "styled-components": "^2.4.0",
-    "styled-jsx": "^2.2.1",
     "xmldom": "git+https://github.com/timsuchanek/xmldom#node-list"
   },
   "keywords": [
