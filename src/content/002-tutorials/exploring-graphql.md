@@ -4,8 +4,6 @@ description: Using tools such as GraphiQL to explore the capabilities of WPGraph
 path: tutorials/exploring-graphql
 ---
 
-# Exploring WPGraphQL
-
 In this Tutorial, we will be exploring GraphQL using GraphiQL.
 
 ## GraphiQL

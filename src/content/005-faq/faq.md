@@ -4,8 +4,6 @@ description: Frequently asked questions about WPGraphQL
 path: faq/faq
 ---
 
-# FAQ
-
 ## How to use Custom Post Types and Custom Taxonomies?
 
 It's pretty common to want to expose Custom Post Type and Custom Taxonomies in WPGraphQL. We have tutorials written up on how to do this!

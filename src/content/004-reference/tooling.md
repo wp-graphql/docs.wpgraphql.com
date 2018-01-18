@@ -3,13 +3,12 @@ title: "Tooling"
 description: Learn about tooling for working with GraphQL in general (and WPGraphQL specifically)
 path: reference/tooling
 ---
-# GraphQL Tooling
 
 One of the big benefits of the GraphQL Type spec is that it lends itself to great tooling.
 
 This is a list of tools that make it easy to work with GraphQL (either generally, or specific to WPGraphQL). 
 
-# GraphiQL
+## GraphiQL
 GraphiQL is an open source in-browser GraphQL IDE tool created and maintained by Facebook. It makes it easy to interact with and debug GraphQL requests and explore a GraphQL Schema.
 
 Below is a list of various GraphiQL implementations:

@@ -4,8 +4,6 @@ description: Information about contributing to WPGraphQL
 path: getting-started/contributing
 ---
 
-# Roadmap / Contributing
-
 The general roadmap for a 1.0.0 release of WPGraphQL is:
 
 * [ ] Full unit test coverage \(98-100%\).
