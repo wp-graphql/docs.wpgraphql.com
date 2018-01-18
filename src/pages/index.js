@@ -8,7 +8,7 @@ const HomePageHero = styled.div`
   position: relative;
   box-sizing: border-box;
   width: 100%;
-  height: 500px;
+  min-height: 500px;
   padding: 150px 0;
   background-color: #001529;
   display: flex;
