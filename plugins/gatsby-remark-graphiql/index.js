@@ -1,32 +1,21 @@
 const visit = require('unist-util-visit')
 
-module.exports = ({ markdownAST }, { language = 'graphql', theme = 'default' } = {}) => {
+module.exports = ({ markdownAST }, { language = 'graphql' } = {}) => {
   visit(markdownAST, 'code', node => {
     let lang = (node.lang || '').toLowerCase()
-    console.info(`lang is ${lang}`)
   if (lang === language) {
     node.type = 'html'
-
-    console.log( node );
-
-    var lines = node.value.split('\n');
-    var firstLine = lines.shift().match(/^\s*#\s*({.*})$/);
-
-    console.log( firstLine );
-
-    if (firstLine) {
-      var metaData;
-      try {
-        metaData = JSON.parse(firstLine[1]);
-      } catch (e) {
-        console.error('Invalid Metadata JSON:', firstLine[1]);
-      }
-      if (metaData) {
-        var query = lines.join('\n');
-        var variables = metaData.variables ? JSON.stringify(metaData.variables, null, 2) : '';
-        node.value = `<div class="graphiql" data-query="${query}" data-variables="${variables}" >${node.value}</div>`
-      }
-    }
+    node.value = `<div class="graphiql-playground">${node.value}</div>`
   }
 })
+}
+
+module.exports = ({ markdownAST }, { language = 'tip' } = {}) => {
+  visit(markdownAST, 'code', node => {
+    let lang = (node.lang || '').toLowerCase()
+    if (lang === language) {
+      node.type = 'html'
+      node.value = `<div class="ant-card ant-card-bordered ant-card-wider-padding ant-card-type-inner"><div class="ant-card-head"><div class="ant-card-head-wrapper"><div class="ant-card-head-title">Inner Card title</div><div class="ant-card-extra"><a href="#">More</a></div></div></div><div class="ant-card-body"><div>>${node.value}</div></div></div>`
+    }
+  })
 }

@@ -4,22 +4,19 @@ description: Learn about the WPGraphQL Plugin and how to uses this site
 path: getting-started/about
 ---
 
-![Logo](https://www.wpgraphql.com/wp-content/uploads/2017/06/wpgraphql-logo-e1502819081849.png)
-
-WPGraphQL - A free, open-source WordPress plugin that provides an extendable GraphQL schema and API for any WordPress site.
+![Logo](https://d2ffutrenqvap3.cloudfront.net/items/1i0F192I0j3F042t3S3R/logo-250.png)
 
 You are currently viewing the WPGraphQL docs and reference, where you can read about major concepts, dive into technical details or follow practical examples to learn how WPGraphQL works.
 
-<a href="https://www.wpgraphql.com" target="_blank">Website</a> • <a href="https://wp-graphql.github.io/wp-graphql-api-docs/" target="_blank">ApiGen Code Docs</a> • <a href="https://wpgql-slack.herokuapp.com/" target="_blank">Slack</a>
+<a href="https://wpgraphql.com" target="_blank">Website</a> • <a href="https://wp-graphql.github.io/wp-graphql-api-docs/" target="_blank">ApiGen Code Docs</a> • <a href="https://wpgql-slack.herokuapp.com/" target="_blank">Slack</a>
 
 [![Build Status](https://travis-ci.org/wp-graphql/wp-graphql.svg?branch=master)](https://travis-ci.org/wp-graphql/wp-graphql)
 [![Coverage Status](https://coveralls.io/repos/github/wp-graphql/wp-graphql/badge.svg?branch=master)](https://coveralls.io/github/wp-graphql/wp-graphql?branch=master)
 
-----
+## WPGraphQL is A free, open-source WordPress plugin that provides an extendable GraphQL schema and API for any WordPress site.
 
->**Warning:**
 > Until WPGraphQL hits a [1.0.0 release](contributing.md), it is still considered beta software. This doesn't mean that the plugin isn't ready for use, it just means that there _might_ still be [bugs](https://github.com/wp-graphql/wp-graphql) and that there _might_ be breaking changes to the shape of the API or internal functions as we work toward a stable release. 
->
+> 
 > Don't hesitate to start using the plugin, but just be sure to follow along with [releases](https://github.com/wp-graphql/wp-graphql/releases) 
 > and keep up to date with conversations in [Slack \(join here\)](https://wpgraphql.com/community) 
 >    
@@ -42,8 +39,8 @@ GraphQL can be implemented in any language and can cover a vast amount of use ca
 
 WPGraphQL exposes a WordPress installation's data through a GraphQL API. You can send a GraphQL request over HTTP to the `/graphql` endpoint provided by the plugin and in response you will get the matching JSON representation of your data.
 
-!!! note "Use WPGraphQL without HTTP requests"
-    You can also use GraphQL Queries and Mutations from within WordPress PHP without the need for HTTP network requests. [Learn more](tutorials/use-graphql-in-php-without-http-request.md)
+> #### Use WPGraphQL without HTTP requests
+> You can also use GraphQL Queries and Mutations from within WordPress PHP without the need for HTTP network requests. [Learn more](tutorials/use-graphql-in-php-without-http-request.md)
 
 ## Why use WPGraphQL?
 
@@ -74,8 +71,8 @@ WPGraphQL adds a `/graphql` endpoint to your WordPress install.
 
 When HTTP requests are made to that endpoint, WPGraphQL executes the GraphQL request. 
 
-!!! note "Use WPGraphQL without HTTP requests"
-    You can also use GraphQL Queries and Mutations from within WordPress PHP without the need for HTTP network requests. [Learn more](tutorials/use-graphql-in-php-without-http-request.md)
+> #### Use WPGraphQL without HTTP requests
+> You can also use GraphQL Queries and Mutations from within WordPress PHP without the need for HTTP network requests. [Learn more](tutorials/use-graphql-in-php-without-http-request.md)
 
 The first part of the execution process, is validating the Query. Since GraphQL is centered around a strong typed Schema, before any real execution begins GraphQL can compare the request against the Schema to make sure the request is even valid. 
 

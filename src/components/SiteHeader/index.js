@@ -7,12 +7,20 @@ import Search from '../Search'
 const { Header } = Layout;
 const SubMenu = Menu.SubMenu;
 
-
 const Logo = styled.div`
   float:left;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  >a{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+  }
   >*>img {
-    height 45px;
+    height 30px;
     width: auto;
+    margin: 0;
   }
 `;
 
@@ -26,16 +34,13 @@ const SiteHeader = () => (
           </Link>
         </Logo>
       </Col>
-      <Col xxl={10} xl={9} lg={9} md={8} sm={0} xs={0}>
-        <Search/>
-      </Col>
-      <Col xxl={10} xl={10} lg={10} md={10} sm={0} xs={0}>
+      <Col xxl={16} xl={15} lg={10} md={14} sm={0} xs={0}>
         <Menu
           theme="dark"
           mode="horizontal"
-          style={{ lineHeight: '64px', float:'right' }}
+          style={{ lineHeight: '64px', float: 'right' }}
         >
-          <SubMenu title={<span><Icon type="file" /> Docs</span>}>
+          <SubMenu title={<span> Learn</span>}>
             <Menu.Item key="/about">
               <Link to="/getting-started/about"><Icon type="setting" /> Getting Started</Link>
             </Menu.Item>
@@ -52,10 +57,19 @@ const SiteHeader = () => (
               <Link to="/faq/extending"><Icon type="question-circle-o" /> FAQ</Link>
             </Menu.Item>
           </SubMenu>
+          <Menu.Item key="community">
+            <Link to="/community">Community </Link>
+          </Menu.Item>
+          <Menu.Item key="blog">
+            <Link to="/blog" >Blog</Link>
+          </Menu.Item>
           <Menu.Item key="github">
             <a href="https://github.com/wp-graphql/wp-graphql" target="_blank">Github <Icon type="github" /></a>
           </Menu.Item>
         </Menu>
+      </Col>
+      <Col xxl={4} xl={4} lg={9} md={4} sm={0} xs={0}>
+        <Search/>
       </Col>
     </Row>
   </Header>

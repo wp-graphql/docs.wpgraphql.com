@@ -2,13 +2,19 @@ module.exports = {
   siteMetadata: {
     title: `WPGraphQL Docs`
   },
-  pathPrefix: "/wpgraphql.com",
+  pathPrefix: "http://wpgraphql.com/",
   plugins: [
     `gatsby-plugin-antd`,
     `gatsby-plugin-catch-links`,
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-styled-components`,
     `gatsby-plugin-twitter`,
+    {
+      resolve: `gatsby-plugin-typography`,
+      options: {
+        pathToConfigModule: `src/utils/typography.js`,
+      },
+    },
     {
       resolve: `gatsby-plugin-favicon`,
       options: {

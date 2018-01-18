@@ -18,8 +18,7 @@ You can download the plugin or clone the plugin from [Github](https://github.com
 
 Add the downloaded/cloned plugin to your WordPress plugin directory. On a typical WordPress install, this is located at `/wp-content/plugins`
 
-!!! note
-    The plugin directory should be `wp-graphql` and not something like `wp-graphql-master` or `wp-graphql-develop`
+> The plugin directory should be `wp-graphql` and not something like `wp-graphql-master` or `wp-graphql-develop`
 
 ## Activate the Plugin
 

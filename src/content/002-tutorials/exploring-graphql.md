@@ -26,9 +26,9 @@ Below is a (non-comprehensive) list of tools that implement GraphiQL that you ca
 * **[Altair](https://chrome.google.com/webstore/detail/altair-graphql-client/flnheeellpciglgpaodhkhmapeljopja?hl=en):** Chrome Extension
 * **[ChromiQL](https://chrome.google.com/webstore/detail/chromeiql/fkkiamalmpiidkljmicmjfbieiclmeij?hl=en):** Chrome Extension
 
-!!! info "This Guide References the GraphiQL Desktop App"
-    Throughout this guide, for screenshots, etc we use [GraphiQL Desktop App](https://github.com/skevy/graphiql-app). Any specific info on using GraphiQL will be referring to that specific App, but should be generally applicable to any of them.
-    Feel free to use the same one we use, explore the others, or even build your own!
+> ### "This Guide References the GraphiQL Desktop App"
+> Throughout this guide, for screenshots, etc we use [GraphiQL Desktop App](https://github.com/skevy/graphiql-app). Any specific info on using GraphiQL will be referring to that specific App, but should be generally applicable to any of them.
+> Feel free to use the same one we use, explore the others, or even build your own!
 
 ## Configure GraphiQL
 
@@ -38,7 +38,7 @@ the first thing you will want to do is point it at your WPGraphQL endpoint.
 
 When the app is first opened, you may notice a blank right pane, or an error showing that GraphiQL failed to fetch. 
 
-![GraphiQL Error when first opening the app](../assets/images/graphiql-01-error-when-opening-app.png)
+![GraphiQL Error when first opening the app](https://d2ffutrenqvap3.cloudfront.net/items/2e3M0h2N2h2K1E3G1b44/graphiql-01-error-when-opening-app.png?v=7eda3d7d)
 
 This is because GraphiQL isn't pointed to a valid GraphQL endpoint.
 
@@ -50,7 +50,7 @@ I have a local WordPress install running at `wpgraphql.dev`, so my endpoint is `
 
 When I paste in my WPGraphQL url, the error goes away. This is because the App went and fetched my GraphQL schema and populated the GraphQL Documentation pane.
 
-![GraphiQL Paste in URL](../assets/images/graphiql-02-paste-url.gif)
+![GraphiQL Paste in URL](https://d2ffutrenqvap3.cloudfront.net/items/2d0z2z2h3s1j172k093A/graphiql-02-paste-url.gif?v=eaa9434b)
 
 ## Explore your Schema Docs
 
@@ -60,10 +60,9 @@ At the top left of GraphiQL, you should see a "< Docs" link.
 
 Clicking that expands the Documentation panel.
 
-![GraphiQL Open Docs](../assets/images/graphiql-03-open-docs.gif)
+![GraphiQL Open Docs](https://d2ffutrenqvap3.cloudfront.net/items/2l1C2H343M0u0g2M0l3k/graphiql-03-open-docs.gif?v=568a91cd)
 
-!!! note
-    You can adjust the width of the Documentation panel to your liking by selecting the left border of the panel and dragging and dropping.
+> You can adjust the width of the Documentation panel to your liking by selecting the left border of the panel and dragging and dropping.
     
 From the Documentation panel, you can see that at the root of the WPGraphQL Schema is `query: RootQuery` and `mutation: RootMutation`. 
 
@@ -73,13 +72,13 @@ You can click into either to explore the capabilities nested below.
 
 For example, clicking `RooyQuery` displays the fields that are available as part of the root. You can scroll through the list to see what's available. what the description is, what Type will be returned, and what arguments the field accepts.
 
-![GraphiQL Explore Root Query](../assets/images/graphiql-04-explore-root-query.gif)
+![GraphiQL Explore Root Query](https://d2ffutrenqvap3.cloudfront.net/items/1J3q2m3y301U2y1d1V2E/graphiql-04-explore-root-query.gif?v=e0221cf9)
 
 When looking at the GraphQL Docs, it might be overwhelming trying to understand what everything is that you're seeing. 
 
 Here's an annotated breakdown of what is displayed in the Documentation panel as you explore the docs.
 
-![GraphiQL Annotated Docs](../assets/images/graphiql-05-field-annotation.png)
+![GraphiQL Annotated Docs](https://d2ffutrenqvap3.cloudfront.net/items/1n0e2219262x380q3Z26/graphiql-05-field-annotation.png?v=5039c4b6)
 
 ### Search the Docs
 
@@ -88,7 +87,7 @@ know how to use GraphQL to query for pages. You could search "page" in the Searc
 you would see all results in the Schema where "page" was mentioned. This can help understand all the entry points where "pages"
 can be queried. 
 
-![GraphiQL Search Docs](../assets/images/graphiql-06-search-docs.png)
+![GraphiQL Search Docs](https://d2ffutrenqvap3.cloudfront.net/items/2e0K3m1Q1z3C3z470e0n/graphiql-06-search-docs.gif?v=518517c8)
 
 We can see here that there is a "pages" field on the RootQuery. Next, Let's try to query for pages!
 
@@ -115,7 +114,7 @@ Once ready, click the Play button to execute the query.
 Below, you can see using the Typeahead feature to help build a query and see what fields are available. You can also see how GraphiQL shows helpers 
 when the syntax is broken by highlighting things red. 
 
-![GraphiQL Write first Query](../assets/images/graphiql-07-write-first-query.gif)
+![GraphiQL Write first Query](https://d2ffutrenqvap3.cloudfront.net/items/3T1Y3O182N1u0F0h0q0G/graphiql-07-write-first-query.gif?v=e0221cf9)
 
 ### Queries to try
 
@@ -147,7 +146,7 @@ You would typically first use `WP_Query` to get a list of posts, then while loop
 
 GraphQL drastically simplifies that, allowing you to just declare what fields you want from each post, and what fields you want from each Post's author. And, 
 behind the scenes, WPGraphQL is doing some cool stuff to optimize the queries to make sure the fewest possible queries are run
-to get the needed data. [Learn More](../reference/deferred-resolvers.md)
+to get the needed data. [Learn More](../../reference/deferred-resolvers.md)
 
 ```graphql
 {
@@ -257,8 +256,8 @@ Now run that query and see how the fields are returned with the Aliases set as t
 
 Variables are a very powerful feature of GraphQL.  
 
-!!! warning "Coming Soon"
-    Until we have time to write more info on this, you can learn more [here](http://graphql.org/learn/queries/#variables)
+> ### Coming Soon
+> Until we have time to write more info on this, you can learn more [here](http://graphql.org/learn/queries/#variables)
 
 
 ## Keep Exploring
@@ -267,8 +266,8 @@ At this point, you should be familiar enough with GraphiQL to continue exploring
 
 ## Debugging Requests
 
-!!! info "Disclaimer" 
-    This section applies particularly to the [GraphiQL Desktop App](https://github.com/skevy/graphiql-app) as it's an Electron app.
+> ### Disclaimer 
+> This section applies particularly to the [GraphiQL Desktop App](https://github.com/skevy/graphiql-app) as it's an Electron app.
 
 Since the GraphiQL Desktop App is an Electron App, it's built on Chromium, which means we can open up Chrome developer tools `Command + Option + I`
 
@@ -280,5 +279,5 @@ You can see the requests that are sent and the payloads that are returned. You c
 
 Using the Network tab can be helpful for debugging when something goes wrong and no response is rendered in the GraphiQL response pane.
 
-!!! warning "More info coming soon"
-    This section needs more info...
+> ### More info coming soon"
+> This section needs more info...

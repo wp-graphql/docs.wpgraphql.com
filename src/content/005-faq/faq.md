@@ -142,8 +142,8 @@ Then, we would store the `endCursor` as a variable `$endCursor = query.posts.pag
 
 WPGraphQL takes the `after` argument on the connection, and uses that to determine where to start the query and get the 10 posts after that point in the data set.
 
-!!! note "Variables with GraphQL"
-    This is a basic example showing variables in GraphQL Query. As you work with GraphQL more, there are better ways to handle variables in your GraphQL requests. [Learn more about using GraphQL variables](http://graphql.org/learn/queries/#variables)
+> ### Variables with GraphQL
+> This is a basic example showing variables in GraphQL Query. As you work with GraphQL more, there are better ways to handle variables in your GraphQL requests. [Learn more about using GraphQL variables](http://graphql.org/learn/queries/#variables)
 
 ### Other Edge Data
 Pagination is an important part of the "connection" shape of the Schema, but "edges" provide a great spot for other info
@@ -153,8 +153,8 @@ One hypothetical example of edge data, would be a `friendsSince` field on a conn
 a property of either user, it's a property that exists only in the context of the connection. A naiive schema wouldn't have a good way
 to display this "edge" data, but the Relay connection spec provides the nested edges/node shape to make it easy to query for "edge" data when needed.
 
-!!! info "Food for thought"
-    Possibly WordPress will one day have a formal way to store Term_Relationship_Meta or Object_Relationship_Meta, where data can be stored when info about specific connections is needed. This would be perfect for displaying as "edge" data in the GraphQL Schema.
+> ### Food for thought
+> Possibly WordPress will one day have a formal way to store Term_Relationship_Meta or Object_Relationship_Meta, where data can be stored when info about specific connections is needed. This would be perfect for displaying as "edge" data in the GraphQL Schema.
 
 ## What is a GraphQL Client?
 

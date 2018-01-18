@@ -28,8 +28,6 @@ The general roadmap for a 1.0.0 release of WPGraphQL is:
 * [x] User Queries
 * [x] User Mutations \(basic CRUD\)
 
---8<-- "../CONTRIBUTING.md"
-
 ### Filing an issue
 
 If you've found an issue, we'd love to hear about it, _but_ we'd love to have sufficient details to investigate. When filing an issue, provide as much details as you can about the issue, screenshots are helpful, and a detailed description of the of what actions you've taken to debug already.
