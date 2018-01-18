@@ -5,18 +5,18 @@ import Link from 'gatsby-link'
 import JsxParser from 'react-jsx-parser'
 import styled from 'styled-components'
 
-const StyledTip = styled.div`
-    background-color: rgba(255,229,100,0.3);
-    border-left-color: #ffe564;
-    border-left-width: 9px;
-    border-left-style: solid;
-    padding: 20px 45px 20px 26px;
-    margin-bottom: 30px;
-    margin-top: 20px;
-`;
-
-const Tip = ({children}) => <div><StyledTip>{children}</StyledTip></div>;
-const Playground = ({children}) => <div className="graphiql"><StyledTip>{children}</StyledTip></div>;
+// const StyledTip = styled.div`
+//     background-color: rgba(255,229,100,0.3);
+//     border-left-color: #ffe564;
+//     border-left-width: 9px;
+//     border-left-style: solid;
+//     padding: 20px 45px 20px 26px;
+//     margin-bottom: 30px;
+//     margin-top: 20px;
+// `;
+//
+// const Tip = ({children}) => <div><StyledTip>{children}</StyledTip></div>;
+// const Playground = ({children}) => <div className="graphiql"><StyledTip>{children}</StyledTip></div>;
 
 
 
@@ -81,14 +81,15 @@ class DocumentationTemplate extends React.Component {
         <Layout style={{ padding: '0 24px 24px', minHeight: 'calc(100vh - 64px)' }}>
           <Content style={{ background: '#fff', padding: 24, margin: "24px 0px 0px 0px" }}>
             <h1>{doc.frontmatter.title}</h1>
-            <JsxParser
-              jsx={doc.html}
-              components={{
-                PLAYGROUND: Playground,
-                TIP: Tip,
-              }}
-              showWarnings={true}
-            />
+            <div dangerouslySetInnerHTML={{__html: doc.html }} />
+            {/*<JsxParser*/}
+              {/*jsx={doc.html}*/}
+              {/*components={{*/}
+                {/*PLAYGROUND: Playground,*/}
+                {/*TIP: Tip,*/}
+              {/*}}*/}
+              {/*showWarnings={true}*/}
+            {/*/>*/}
           </Content>
           <DocFooter next={next} prev={prev} />
         </Layout>

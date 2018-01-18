@@ -12,6 +12,7 @@ const Logo = styled.div`
   display:flex;
   justify-content: center;
   align-items: center;
+  height:64px;
   >a{
     display:flex;
     justify-content: center;
