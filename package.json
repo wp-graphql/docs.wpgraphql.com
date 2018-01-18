@@ -28,14 +28,12 @@
     "gatsby-source-filesystem": "^1.5.11",
     "gatsby-transformer-remark": "^1.7.26",
     "react-instantsearch": "^4.4.0",
-    "react-jsx-parser": "git+https://github.com/timsuchanek/react-jsx-parser#components-object3",
     "styled-components": "^2.4.0",
     "typography-theme-bootstrap": "^0.16.7",
     "typography-theme-github": "^0.15.10",
     "typography-theme-lawton": "^0.15.10",
     "typography-theme-wordpress-2015": "^0.15.10",
-    "typography-theme-wordpress-2016": "^0.15.10",
-    "xmldom": "git+https://github.com/timsuchanek/xmldom#node-list"
+    "typography-theme-wordpress-2016": "^0.15.10"
   },
   "keywords": [
     "gatsby",

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import SidebarNav from '../components/SidebarNav'
 import { Layout } from 'antd'
 import Link from 'gatsby-link'
-import JsxParser from 'react-jsx-parser'
+// import JsxParser from 'react-jsx-parser'
 import styled from 'styled-components'
 
 // const StyledTip = styled.div`

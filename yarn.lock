@@ -8481,13 +8481,6 @@ react-instantsearch@^4.4.0:
     lodash "^4.17.4"
     prop-types "^15.5.10"
 
-"react-jsx-parser@git+https://github.com/timsuchanek/react-jsx-parser#components-object3":
-  version "0.0.12"
-  resolved "git+https://github.com/timsuchanek/react-jsx-parser#32b22ad8db0884aaf24d11f7682f09113c29fbde"
-  dependencies:
-    prop-types "^15.5.10"
-    react "^15.4.2"
-
 react-lazy-load@^3.0.12:
   version "3.0.13"
   resolved "https://registry.yarnpkg.com/react-lazy-load/-/react-lazy-load-3.0.13.tgz#3b0a92d336d43d3f0d73cbe6f35b17050b08b824"
@@ -8549,7 +8542,7 @@ react-typography@^0.16.1:
   version "0.16.13"
   resolved "https://registry.yarnpkg.com/react-typography/-/react-typography-0.16.13.tgz#94bdd2a9448823bc74d8ebf7465d86c7dbe20dcf"
 
-react@^15.4.2, react@^15.6.0:
+react@^15.6.0:
   version "15.6.2"
   resolved "https://registry.yarnpkg.com/react/-/react-15.6.2.tgz#dba0434ab439cfe82f108f0f511663908179aa72"
   dependencies:
@@ -11172,10 +11165,6 @@ xml2js@>=0.2.4, xml2js@^0.4.5:
 xmlbuilder@~9.0.1:
   version "9.0.4"
   resolved "https://registry.yarnpkg.com/xmlbuilder/-/xmlbuilder-9.0.4.tgz#519cb4ca686d005a8420d3496f3f0caeecca580f"
-
-"xmldom@git+https://github.com/timsuchanek/xmldom#node-list":
-  version "0.1.27"
-  resolved "git+https://github.com/timsuchanek/xmldom#1ca3a99d09d024c9e30d7fd43a10dee36fea887c"
 
 xmlhttprequest-ssl@~1.5.4:
   version "1.5.4"
