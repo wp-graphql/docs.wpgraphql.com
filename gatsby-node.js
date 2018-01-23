@@ -12,7 +12,7 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
 
   return graphql(`
     query getAllMarkdown {
-      allMarkdownRemark(limit: 1000, sort: {order: ASC, fields: [fileAbsolutePath]}, filter: {fileAbsolutePath: {regex: "//content//"}}) {
+      allMarkdownRemark(limit: 1000, sort: {order: ASC, fields: [fileAbsolutePath]}, filter: {fileAbsolutePath: {regex: "//content/docs//"}}) {
         edges {
           previous {
             id

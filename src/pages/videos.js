@@ -3,10 +3,10 @@ import Link from 'gatsby-link'
 import { Button, Icon } from 'antd'
 import styled from 'styled-components'
 
-const BlogIndex = () => (
+const Videos = () => (
   <div>
-    <h1>BlogIndex</h1>
+    <h1>Videos</h1>
   </div>
 )
 
-export default BlogIndex
+export default Videos
