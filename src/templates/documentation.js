@@ -64,27 +64,36 @@ class DocumentationTemplate extends React.Component {
     const doc = this.props.data.markdownRemark;
     const prev = context.previous;
     const next = context.next;
+
+    /**
+     * Parse the content and replace inline components from Markdown content with actual React components
+     */
+    const content = Parser(doc.html, {
+      replace: (domNode) => {
+        /**
+         * Replace inline <Playground> components with the actual Playground component
+         */
+        if (domNode.type === 'tag' && domNode.name === 'playground') {
+          return <Playground>{domToReact(domNode.children)}</Playground>;
+        }
+
+        /**
+         * Replace inline <Tip> components with the actual Tip component
+         */
+        if (domNode.type === 'tag' && domNode.name === 'tip') {
+          return <Tip/>
+        }
+      }
+    });
+
     return (
       <Layout>
         <SidebarNav pathContext={this.props.pathContext} location={this.props.location} />
         <Layout style={{ padding: '0 24px 24px', minHeight: 'calc(100vh - 64px)' }}>
           <Content style={{ background: '#fff', padding: 24, margin: "24px 0px 0px 0px" }}>
             <h1>{doc.frontmatter.title}</h1>
-            {/*<div dangerouslySetInnerHTML={{__html: doc.html }} />*/}
             <div>
-              {
-                Parser(doc.html, {
-                  replace: (domNode) => {
-                    console.log(domNode);
-                    if (domNode.type === 'tag' && domNode.name === 'playground') {
-                      return <Playground>{domToReact(domNode.children)}</Playground>;
-                    }
-                    if (domNode.type === 'tag' && domNode.name === 'tip') {
-                      return <Tip/>
-                    }
-                  }
-                })
-              }
+              {content}
             </div>
           </Content>
           <DocFooter next={next} prev={prev} />
