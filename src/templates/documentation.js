@@ -3,6 +3,8 @@ import SidebarNav from '../components/SidebarNav'
 import { Layout } from 'antd'
 import Link from 'gatsby-link'
 import styled from 'styled-components'
+import Parser from 'html-react-parser';
+import domToReact from 'html-react-parser/lib/dom-to-react';
 
 const { Content } = Layout
 
@@ -53,6 +55,9 @@ class DocFooter extends Component {
 
 }
 
+const Playground = ({children}) => <div><h1>GraphiQL, Yo</h1>{children}</div>
+const Tip = () => <div>TIPPPPPP</div>
+
 class DocumentationTemplate extends React.Component {
   render() {
     const context = this.props.pathContext;
@@ -65,7 +70,22 @@ class DocumentationTemplate extends React.Component {
         <Layout style={{ padding: '0 24px 24px', minHeight: 'calc(100vh - 64px)' }}>
           <Content style={{ background: '#fff', padding: 24, margin: "24px 0px 0px 0px" }}>
             <h1>{doc.frontmatter.title}</h1>
-            <div dangerouslySetInnerHTML={{__html: doc.html }} />
+            {/*<div dangerouslySetInnerHTML={{__html: doc.html }} />*/}
+            <div>
+              {
+                Parser(doc.html, {
+                  replace: (domNode) => {
+                    console.log(domNode);
+                    if (domNode.type === 'tag' && domNode.name === 'playground') {
+                      return <Playground>{domToReact(domNode.children)}</Playground>;
+                    }
+                    if (domNode.type === 'tag' && domNode.name === 'tip') {
+                      return <Tip/>
+                    }
+                  }
+                })
+              }
+            </div>
           </Content>
           <DocFooter next={next} prev={prev} />
         </Layout>

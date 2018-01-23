@@ -17,3 +17,17 @@ path: test
   }
 }
 ```
+
+<Playground>
+{
+  posts {
+    edges {
+      node {
+        id
+        title
+        date
+      }
+    }
+  }
+}
+</Playground>
