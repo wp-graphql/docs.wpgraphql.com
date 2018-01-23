@@ -5,6 +5,37 @@ import Link from 'gatsby-link'
 import styled from 'styled-components'
 import Parser from 'html-react-parser';
 import domToReact from 'html-react-parser/lib/dom-to-react';
+import SyntaxHighlighter from 'react-syntax-highlighter/prism';
+import { light, xonokai } from 'react-syntax-highlighter/styles/prism';
+import SplitPane from 'react-split-pane'
+import { makeExecutableSchema, addMockFunctionsToSchema } from 'graphql-tools';
+import { graphql } from 'graphql';
+
+const typeDefs = `
+ type Query {
+   post: Post
+ }
+ type Post {
+   id: ID!
+   title: String
+   date: String
+   excerpt: String
+ }
+`;
+
+const schema = makeExecutableSchema({ typeDefs });
+addMockFunctionsToSchema({
+  schema,
+  mocks: {
+    Post: () => ({
+      id: btoa( 'post:1' ),
+      title: "Hello World",
+      date: Date.now(),
+      excerpt: 'Mock Excerpt'
+    })
+  },
+  preserveResolvers: false
+});
 
 const { Content } = Layout
 
@@ -55,7 +86,43 @@ class DocFooter extends Component {
 
 }
 
-const Playground = ({children}) => <div><h1>GraphiQL, Yo</h1>{children}</div>
+class MockResults extends Component {
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      results: null
+    };
+  };
+
+  componentDidMount() {
+    let self = this;
+    let query = this.props.query ? this.props.query : null;
+    graphql(schema, query).then((result) => {
+      self.setState({ results: JSON.stringify( result, null, 2 ) });
+    });
+  }
+
+  render() {
+      return <SyntaxHighlighter language='json' style={xonokai}>{ this.state.results !== null ? this.state.results : 'Loading...' }</SyntaxHighlighter>
+  }
+
+}
+
+const Playground = ({children, title}) => (
+  <div style={{border: '2px solid linear-gradient(#f0f0f0, #dedede)', borderRadius:'5px 5px 0 0', boxShadow: 'inset 0 2px 2px -2px white, 0 1px rgba(0, 0, 0)', marginBottom:'30px'}}>
+    <h3 style={{background: '#eaeaea', 'marginBottom': 0, 'padding': 10, 'borderRadius': '25 25 0 0'}}>{title ? title : 'Playground'}</h3>
+    <SplitPane defaultSize={'50%'} split="vertical" style={{backgroundColor: '#F4F0EE', position:'relative'}}>
+      <div style={{backgroundColor:'#F4F0EE', height:'100%'}}>
+        <SyntaxHighlighter language='graphql' style={light}>{children}</SyntaxHighlighter>
+      </div>
+      <div style={{backgroundColor:'#262626'}}>
+        <MockResults query={children} />
+      </div>
+    </SplitPane>
+  </div>
+);
+
 const Tip = () => <div>TIPPPPPP</div>
 
 class DocumentationTemplate extends React.Component {
@@ -74,7 +141,7 @@ class DocumentationTemplate extends React.Component {
          * Replace inline <Playground> components with the actual Playground component
          */
         if (domNode.type === 'tag' && domNode.name === 'playground') {
-          return <Playground>{domToReact(domNode.children)}</Playground>;
+          return <Playground title={domNode.attribs.title}>{domToReact(domNode.children)}</Playground>;
         }
 
         /**
