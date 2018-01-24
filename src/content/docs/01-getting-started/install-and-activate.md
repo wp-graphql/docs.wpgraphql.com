@@ -17,7 +17,7 @@ You can download the plugin or clone the plugin from Github.
 
 Add the downloaded/cloned plugin to your WordPress plugin directory. On a typical WordPress install, this is located at /wp-content/plugins
 
-> To minimize risk of unintended behavior, it's best for your plugin directory to be "wp-graphql" and not something else, like "wp-graphql-master" or "wp-graphql-develop"
+<Warning>To minimize risk of unintended behavior, it's best for your plugin directory to be "wp-graphql" and not something else, like "wp-graphql-master" or "wp-graphql-develop"</Warning>
 
 ## Activate the Plugin
 
@@ -41,7 +41,7 @@ Once the plugin is active, your site should have a `yoursite.com/graphql` endpoi
 }
 ```
 
-> If things aren't working at this point, you may need to [flush permalinks](http://localhost:8000/getting-started/install-and-activate#flush-permalinks)
+<Warning> If things aren't working at this point, you may need to [flush permalinks](http://localhost:8000/getting-started/install-and-activate#flush-permalinks)</Warning>
 
 ### Flush Permalinks
 

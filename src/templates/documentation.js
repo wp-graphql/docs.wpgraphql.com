@@ -1,15 +1,19 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import SidebarNav from '../components/SidebarNav'
-import { Layout } from 'antd'
+import {Layout} from 'antd'
 import Link from 'gatsby-link'
 import styled from 'styled-components'
 import Parser from 'html-react-parser';
 import domToReact from 'html-react-parser/lib/dom-to-react';
 import SyntaxHighlighter from 'react-syntax-highlighter/prism';
-import { light, xonokai } from 'react-syntax-highlighter/styles/prism';
+import {light, xonokai} from 'react-syntax-highlighter/styles/prism';
 import SplitPane from 'react-split-pane'
-import { makeExecutableSchema, addMockFunctionsToSchema } from 'graphql-tools';
-import { graphql } from 'graphql';
+import {makeExecutableSchema, addMockFunctionsToSchema} from 'graphql-tools';
+import {graphql} from 'graphql';
+import Tip from '../components/Tip';
+import Info from '../components/Info';
+import Danger from '../components/Danger';
+import Warning from '../components/Warning';
 
 const typeDefs = `
  type Query {
@@ -23,12 +27,12 @@ const typeDefs = `
  }
 `;
 
-const schema = makeExecutableSchema({ typeDefs });
+const schema = makeExecutableSchema({typeDefs});
 addMockFunctionsToSchema({
   schema,
   mocks: {
     Post: () => ({
-      id: btoa( 'post:1' ),
+      id: btoa('post:1'),
       title: "Hello World",
       date: Date.now(),
       excerpt: 'Mock Excerpt'
@@ -37,7 +41,7 @@ addMockFunctionsToSchema({
   preserveResolvers: false
 });
 
-const { Content } = Layout
+const {Content} = Layout
 
 const DocFooterWrap = styled.div`
   background: #021529;
@@ -56,7 +60,7 @@ const PrevLink = styled.div`
 class DocFooter extends Component {
 
   renderNextLink() {
-    if ( this.props.next && this.props.next.frontmatter.path ) {
+    if (this.props.next && this.props.next.frontmatter.path) {
       return (
         <NextLink>
           <Link to={this.props.next.frontmatter.path}> {this.props.next.frontmatter.title + " >"}</Link>
@@ -66,7 +70,7 @@ class DocFooter extends Component {
   }
 
   renderPrevLink() {
-    if ( this.props.prev && this.props.prev.frontmatter.path ) {
+    if (this.props.prev && this.props.prev.frontmatter.path) {
       return (
         <PrevLink>
           <Link to={this.props.prev.frontmatter.path}>{ "< " + this.props.prev.frontmatter.title}</Link>
@@ -76,7 +80,7 @@ class DocFooter extends Component {
   }
 
   render() {
-    return(
+    return (
       <DocFooterWrap>
         {this.renderPrevLink()}
         {this.renderNextLink()}
@@ -99,31 +103,49 @@ class MockResults extends Component {
     let self = this;
     let query = this.props.query ? this.props.query : null;
     graphql(schema, query).then((result) => {
-      self.setState({ results: JSON.stringify( result, null, 2 ) });
+      self.setState({results: JSON.stringify(result, null, 2)});
     });
   }
 
   render() {
-      return <SyntaxHighlighter language='json' style={xonokai}>{ this.state.results !== null ? this.state.results : 'Loading...' }</SyntaxHighlighter>
+    return (
+      <SyntaxHighlighter
+        showLineNumbers
+        language='json'
+        style={xonokai}
+      >
+      { this.state.results !== null ? this.state.results : 'Loading...' }
+      </SyntaxHighlighter>
+    )
   }
 
 }
 
 const Playground = ({children, title}) => (
-  <div style={{border: '2px solid linear-gradient(#f0f0f0, #dedede)', borderRadius:'5px 5px 0 0', boxShadow: 'inset 0 2px 2px -2px white, 0 1px rgba(0, 0, 0)', marginBottom:'30px'}}>
-    <h3 style={{background: '#eaeaea', 'marginBottom': 0, 'padding': 10, 'borderRadius': '25 25 0 0'}}>{title ? title : 'Playground'}</h3>
-    <SplitPane defaultSize={'50%'} split="vertical" style={{backgroundColor: '#F4F0EE', position:'relative'}}>
-      <div style={{backgroundColor:'#F4F0EE', height:'100%'}}>
+  <div style={{
+    border: '2px solid linear-gradient(#f0f0f0, #dedede)',
+    borderRadius: '5px 5px 0 0',
+    boxShadow: 'inset 0 2px 2px -2px white, 0 1px rgba(0, 0, 0)',
+    marginBottom: '30px'
+  }}>
+    <h3 style={{
+      background: '#eaeaea',
+      'marginBottom': 0,
+      'padding': 10,
+      'borderRadius': '25 25 0 0'
+    }}>{title ? title : 'Playground'}</h3>
+    <SplitPane defaultSize={'50%'} split="vertical" style={{backgroundColor: '#F4F0EE', position: 'relative'}}>
+      <div style={{backgroundColor: '#F4F0EE', height: '100%'}}>
         <SyntaxHighlighter language='graphql' style={light}>{children}</SyntaxHighlighter>
       </div>
-      <div style={{backgroundColor:'#262626'}}>
-        <MockResults query={children} />
+      <div style={{backgroundColor: '#262626'}}>
+        <MockResults query={children}/>
       </div>
     </SplitPane>
   </div>
 );
 
-const Tip = () => <div>TIPPPPPP</div>
+const Highlight = ({children}) => <span className="highlight">{children}</span>
 
 class DocumentationTemplate extends React.Component {
   render() {
@@ -148,22 +170,38 @@ class DocumentationTemplate extends React.Component {
          * Replace inline <Tip> components with the actual Tip component
          */
         if (domNode.type === 'tag' && domNode.name === 'tip') {
-          return <Tip/>
+          return <Tip>{domToReact(domNode.children)}</Tip>;
+        }
+
+        if (domNode.type === 'tag' && domNode.name === 'info') {
+          return <Info>{domToReact(domNode.children)}</Info>;
+        }
+
+        if (domNode.type === 'tag' && domNode.name === 'warning') {
+          return <Warning>{domToReact(domNode.children)}</Warning>;
+        }
+
+        if (domNode.type === 'tag' && domNode.name === 'danger') {
+          return <Danger>{domToReact(domNode.children)}</Danger>;
+        }
+
+        if (domNode.type === 'tag' && domNode.name === 'highlight') {
+          return <Highlight>{domToReact(domNode.children)}</Highlight>;
         }
       }
     });
 
     return (
       <Layout>
-        <SidebarNav pathContext={this.props.pathContext} location={this.props.location} />
-        <Layout style={{ padding: '0 24px 24px', minHeight: 'calc(100vh - 64px)' }}>
-          <Content style={{ background: '#fff', padding: 24, margin: "24px 0px 0px 0px" }}>
+        <SidebarNav pathContext={this.props.pathContext} location={this.props.location}/>
+        <Layout style={{padding: '0 24px 24px', minHeight: 'calc(100vh - 64px)'}}>
+          <Content style={{background: '#fff', padding: 24, margin: "24px 0px 0px 0px"}}>
             <h1>{doc.frontmatter.title}</h1>
             <div>
               {content}
             </div>
           </Content>
-          <DocFooter next={next} prev={prev} />
+          <DocFooter next={next} prev={prev}/>
         </Layout>
       </Layout>
     )
