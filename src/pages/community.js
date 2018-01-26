@@ -8,6 +8,10 @@ const CommunityPage = () => (
     <Row>
       <Col span={12}>
         Slack
+        <form netlify name="join-slack">
+          <input name="email" type="email" />
+          <button typr="submit" />
+        </form>
       </Col>
       <Col span={12}>
         Github
