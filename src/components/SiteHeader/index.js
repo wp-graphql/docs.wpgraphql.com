@@ -9,7 +9,7 @@ const SubMenu = Menu.SubMenu;
 
 const Logo = styled.div`
   display:flex;
-  justify-content: center;
+  justify-content: left;
   align-items: center;
   height:64px;
   >a{
