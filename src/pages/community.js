@@ -1,7 +1,5 @@
 import React from 'react'
-import Link from 'gatsby-link'
-import { Button, Icon, Row, Col } from 'antd'
-import styled from 'styled-components'
+import { Row, Col } from 'antd'
 
 const CommunityPage = () => (
   <div>
