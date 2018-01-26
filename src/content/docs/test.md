@@ -16,8 +16,11 @@ This is a tip, yo
 </Info>
 
 <Danger>
+### Here's a heading...
 This is a tip, yo
 </Danger>
+
+Here's some text with <Highlight>some highlighted text</Highlight>, yo!
 
 ## Getting Started with GraphQL Queries 
 

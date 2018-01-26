@@ -145,7 +145,15 @@ const Playground = ({children, title}) => (
   </div>
 );
 
-const Highlight = ({children}) => <span className="highlight">{children}</span>
+const StyledHighlight = styled.span`
+  color: #525035;
+  background: #FDF37D;
+  display: inline-block;
+  padding: .05rem .2rem;
+  margin: 0;
+`;
+
+const HighlightText = ({children}) => <StyledHighlight>{children}</StyledHighlight>
 
 class DocumentationTemplate extends React.Component {
   render() {
@@ -186,7 +194,7 @@ class DocumentationTemplate extends React.Component {
         }
 
         if (domNode.type === 'tag' && domNode.name === 'highlight') {
-          return <Highlight>{domToReact(domNode.children)}</Highlight>;
+          return <HighlightText>{domToReact(domNode.children)}</HighlightText>;
         }
       }
     });
