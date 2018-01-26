@@ -14,6 +14,7 @@ import Tip from '../components/Tip';
 import Info from '../components/Info';
 import Danger from '../components/Danger';
 import Warning from '../components/Warning';
+import fetch from 'isomorphic-fetch';
 
 const typeDefs = `
  type Query {
@@ -102,9 +103,26 @@ class MockResults extends Component {
   componentDidMount() {
     let self = this;
     let query = this.props.query ? this.props.query : null;
-    graphql(schema, query).then((result) => {
-      self.setState({results: JSON.stringify(result, null, 2)});
+    // graphql(schema, query).then((result) => {
+    //   self.setState({results: JSON.stringify(result, null, 2)});
+    // });
+
+    let graphQLParams = {
+      query: query
+    };
+
+    return fetch('https://wpgraphqlapi.wpengine.com/graphql', {
+      method: 'post',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(graphQLParams),
+    }).then(
+      response => {
+        return response.json();
+      }
+    ).then(function(data) {
+      self.setState({results: JSON.stringify(data, null, 2)});
     });
+
   }
 
   render() {
@@ -114,7 +132,7 @@ class MockResults extends Component {
         language='json'
         style={xonokai}
       >
-      { this.state.results !== null ? this.state.results : 'Loading...' }
+      { this.state.results !== null ? this.state.results : 'Loading response...' }
       </SyntaxHighlighter>
     )
   }
@@ -138,7 +156,7 @@ const Playground = ({children, title}) => (
       <div style={{backgroundColor: '#F4F0EE', height: '100%'}}>
         <SyntaxHighlighter language='graphql' style={light}>{children}</SyntaxHighlighter>
       </div>
-      <div style={{backgroundColor: '#262626'}}>
+      <div style={{backgroundColor: '#262626', maxHeight:'500px', overflow:'auto'}}>
         <MockResults query={children}/>
       </div>
     </SplitPane>
