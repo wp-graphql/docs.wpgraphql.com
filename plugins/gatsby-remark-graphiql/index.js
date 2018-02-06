@@ -3,7 +3,7 @@ let React = require('react')
 let ReactDOMServer = require('react-dom/server')
 let HtmlToReactParser = require('html-to-react').Parser
 
-module.exports = ({markdownAST}, {language = 'graphql', theme = 'default'} = {}) => {
+module.exports = ({markdownAST}, {language = 'graphiql', theme = 'default'} = {}) => {
   visit(markdownAST, 'code', node => {
     let lang = (node.lang || '').toLowerCase()
     console.info(`lang is ${lang}`)

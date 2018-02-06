@@ -1,6 +1,10 @@
 @import url('https://unpkg.com/react-instantsearch-theme-algolia@4.0.0/style.min.css');
 @import url('https://cdn.rawgit.com/PrismJS/prism-themes/master/themes/prism-base16-ateliersulphurpool.light.css');
 
+.gatsby-highlight pre[class*="language-"] {
+    background-color: rgb(244, 240, 238);
+}
+
 blockquote {
     background-color: rgba(255,229,100,0.3);
     border-left-color: #ffe564;
@@ -19,12 +23,20 @@ blockquote {
 }
 .Pane1 {
     background-color: #F4F0EE;
+    overflow: auto;
+    line-break: auto;
 }
 .Pane2{
     background-color: #262626;
+    overflow: auto;
+    line-break: auto;
 }
+.Pane2 * {
+    word-break: break-word;
+}
+
 .Pane1>*>pre,
-.Pane2>*>pre {
+.Pane2>*>*>pre {
     background-color: transparent!important;
     border: 0!important;
 }

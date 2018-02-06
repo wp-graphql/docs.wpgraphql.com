@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import SiteHeader from '../components/SiteHeader'
 import Helmet from 'react-helmet'
 import { Layout } from 'antd'
+import 'prismjs/themes/prism.css';
 
 if (
   process.env.NODE_ENV === `development` ||

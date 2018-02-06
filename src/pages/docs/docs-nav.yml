@@ -1,0 +1,72 @@
+- title: Getting Started
+  section: /docs/getting-started
+  items:
+    - title: About
+      link: /docs/getting-started/about
+    - title: Install and Activate
+      link: /docs/getting-started/install-and-activate
+    - title: Explore the Schema with GraphiQL
+      link: /docs/getting-started/exploring-with-graphiql
+    - title: Getting started with queries
+      link: /docs/getting-started/queries
+    - title: Exploring the Query Language
+      link: /docs/getting-started/exploring-the-query-language
+    - title: Advanced Queries
+      link: /docs/getting-started/advanced-queries
+    - title: Mutations & Auth
+      link: /docs/getting-started/mutations-and-auth
+- title: Extensions
+  section: /docs/extensions
+  items:
+    - title: WPGraphiQL
+      link: /docs/extensions/wp-graphiql
+    - title: WPGraphQL Insights
+      link: /docs/extensions/wp-graphql-insights
+    - title: WPGraphQL JWT Authentication
+      link: /docs/extensions/wp-graphql-jwt-authentication
+    - title: WPGraphQL Meta Query
+      link: /docs/extensions/wp-graphql-meta-query
+    - title: WPGraphQL Tax Query
+      link: /docs/extensions/wp-graphql-tax-query
+    - title: WPGraphQL Dad Jokes
+      link: /docs/extensions/wp-graphql-dad-jokes
+- title: Extending
+  section: /docs/extending
+  items:
+    - title: Overview of Helpful Hooks & Filters
+      link: /docs/extending/helpful-hooks-and-filters
+    - title: Custom Post Types & Taxonomies
+      link: /docs/extending/custom-post-types-and-taxonomies
+    - title: Custom Fields (Meta)
+      link: /docs/extending/custom-fields-and-meta
+    - title: Overriding Field Resolvers
+      link: /docs/extending/overriding-field-resolvers
+    - title: Testing Your Extensions
+      link: /docs/extending/testing-extensions
+- title: Core Concepts
+  section: /docs/core-concepts
+  items:
+    - title: Schema and Types
+      link: /docs/core-concepts/schema-and-types
+    - title: Edges and Nodes (Relay Spec)
+      link: /docs/core-concepts/relay-spec
+- title: Advanced Topics
+  section: /docs/advanced
+  items:
+    - title: Batch Requests
+      link: /docs/advanced/batch-requests
+    - title: Authentication & Authorization
+      link: /docs/advanced/authentication-and-authorization
+    - title: Deferred Resolvers
+      link: /docs/advanced/deferred-resolvers
+    - title: Debugging
+      link: /docs/advanced/debugging
+- title: Community & Support
+  section: /docs/community
+  items:
+    - title: Contributing & Roadmap
+      link: /docs/community/contributing-and-roadmap
+    - title: Unit & Integration Testing Guide
+      link: /docs/community/testing
+    - title: Contributing to Documentation
+      link: /docs/community/contributing-to-documentation

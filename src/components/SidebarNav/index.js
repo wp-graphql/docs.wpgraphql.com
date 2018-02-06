@@ -4,36 +4,24 @@ import { Affix, Layout, Menu, Icon } from 'antd'
 const { SubMenu } = Menu;
 const { Sider } = Layout;
 
-const MenuItems = ({pathContext}) => {
-  
-  let nav = pathContext.nav;
-  let menuItems = Object.keys( nav );
+const MenuItems = ({navItems, pathContext}) => {
 
   /**
    * Loop through the menuItems to generate the menu items
    * @type {Array}
    */
-  const items = menuItems && menuItems.map( (menuItem) => {
+  const items = navItems && navItems.edges && navItems.edges.map( (menuItem) => {
 
     /**
      * If the type is a page, create a menuItem
      */
-    if ( nav[menuItem] && nav[menuItem].type === 'page' ) {
-      return (
-        <Menu.Item key={nav[menuItem].path}>
-          <Link to={nav[menuItem].path}>{nav[menuItem].title}</Link>
-        </Menu.Item>
-      );
-
-    /**
-     * If the type is a directory, create a SubMenu with nested menu items
-     */
-    } else if ( nav[menuItem] && nav[menuItem].type === 'directory' ) {
-      let subMenuItems = Object.keys( nav[menuItem].children );
-      let subItems = subMenuItems.map( (subMenuItem) => {
+    if ( menuItem && menuItem.node && menuItem.node.items ) {
+      let subItems = menuItem.node.items.map( (subMenuItem) => {
+        console.log('subMenuItem');
+        console.log(subMenuItem.link);
         return (
-          <Menu.Item key={nav[menuItem].children[subMenuItem].path}>
-            <Link to={nav[menuItem].children[subMenuItem].path}>{nav[menuItem].children[subMenuItem].title}</Link>
+          <Menu.Item key={subMenuItem.link + '/'}>
+            <Link key={subMenuItem.link} to={subMenuItem.link}>{subMenuItem.title}</Link>
           </Menu.Item>
         );
       });
@@ -43,11 +31,11 @@ const MenuItems = ({pathContext}) => {
        */
       return (
         <SubMenu
-          key={nav[menuItem].name}
+          key={menuItem.node.section}
           title={
             <span>
               <Icon type="file" />
-              <span>{nav[menuItem].title}</span>
+              <span>{menuItem.node.title}</span>
             </span>
           }
         >{subItems}</SubMenu>
@@ -58,7 +46,7 @@ const MenuItems = ({pathContext}) => {
   /**
    * Split the path so we can determine the openKey for the menu
    */
-  let splitPath = pathContext.path.split('/');
+  let splitPath = pathContext && pathContext.path ? pathContext.path.split('/') : '';
 
   /**
    * Determine the open key for the menu.
@@ -70,7 +58,9 @@ const MenuItems = ({pathContext}) => {
    * 
    * @type {null}
    */
-  let openKeys = splitPath[ splitPath.length - 2 ] ? splitPath[ splitPath.length - 2 ] : null;
+  let openKeys = '/' + splitPath[1] + '/' + splitPath[2];
+
+  console.log(pathContext.path);
 
   /**
    * Return the Menu
@@ -78,7 +68,7 @@ const MenuItems = ({pathContext}) => {
   return <Menu
     mode="inline"
     theme="light"
-    style={{height: '100%', borderRight: 0}}
+    style={{height: '100%'}}
     defaultSelectedKeys={[pathContext.path]}
     defaultOpenKeys={[openKeys]}
   >{items}</Menu>;
@@ -86,15 +76,21 @@ const MenuItems = ({pathContext}) => {
 
 class SidebarNav extends React.Component {
   render() {
+    const navItems = this.props.navItems;
     const pathContext = this.props.pathContext;
     return (
-      <Sider style={{
-        background: 'white',
-        overflow: 'auto',
-        minHeight: 'calc(100vh - 64px)' // Viewport height minus header
-      }} width={300}>
+      <Sider
+        style={{
+          background: 'white',
+          overflow: 'auto',
+          width: '100%',
+          maxWidth: '100%',
+          minHeight: 'calc(100vh - 64px)', // Viewport height minus header
+        }}
+        width={'300'}
+      >
         <Affix>
-          <MenuItems pathContext={pathContext} />
+          <MenuItems pathContext={pathContext} navItems={navItems} />
         </Affix>
       </Sider>
     )
