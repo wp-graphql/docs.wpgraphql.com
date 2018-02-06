@@ -1,9 +1,8 @@
 'use strict';
 
 const path = require("path");
+const parseFilepath = require(`parse-filepath`);
 const { syncToAlgolia } = require('./node/algoliasync');
-
-let nav = {};
 
 exports.createPages = ({ boundActionCreators, graphql }) => {
   const { createPage } = boundActionCreators;
@@ -12,18 +11,23 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
 
   return graphql(`
     query getAllMarkdown {
-      allMarkdownRemark(limit: 1000, sort: {order: ASC, fields: [fileAbsolutePath]}, filter: {fileAbsolutePath: {regex: "//content//"}}) {
+      allMarkdownRemark(limit: 1000, sort: {order: ASC, fields: [fileAbsolutePath]}, filter: {fileAbsolutePath: {regex: "//content/docs//"}}) {
         edges {
           previous {
             id
+            fields {
+              slug
+            }
             frontmatter {
               title
               description
-              path
             }
           }
           node {
             fileAbsolutePath
+            fields {
+              slug
+            }
             id
             shortExcerpt:excerpt(pruneLength:100)
             excerpt(pruneLength:1000)
@@ -32,15 +36,16 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
             frontmatter {
               title
               description
-              path
             }
           }
           next {
             id
+            fields {
+              slug
+            }
             frontmatter {
               title
               description
-              path
             }
           }
         }
@@ -56,23 +61,19 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
      */
     const allPages = result.data.allMarkdownRemark.edges;
 
-    /**
-     * Creates the navigation
-     */
-    allPages.map(addNavItem);
-
-    console.log( 'Syncing to Algolia...' );
-    syncToAlgolia(result.data);
-
+    if ( process.env.BRANCH && process.env.BRANCH === 'master' ) {
+      console.log( 'Syncing to Algolia...' );
+      syncToAlgolia(result.data);
+    }
 
     /**
      * Creates the pages
      */
     allPages.forEach(({ node, next, previous } ) => {
 
-      let path = node.frontmatter && node.frontmatter.path ? node.frontmatter.path : '/';
+      let path = node.fields && node.fields.slug ? node.fields.slug : '/';
 
-      if ( node.frontmatter && node.frontmatter.path ) {
+      if ( path ) {
 
         /**
          * Create the page, passing context that can be used
@@ -83,10 +84,7 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
           component: docTemplate,
           context: {
             path: path,
-            nav: nav,
             node: node,
-            next: next,
-            previous: previous
           },
         });
 
@@ -96,40 +94,36 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
   });
 };
 
-/**
- * Add nav item to the navigation
- * @param obj
- * @param i
- */
-function addNavItem( obj, i ){
-
-  if ( obj.node.frontmatter.path ) {
-
-    let splitpath = obj.node.frontmatter.path ? obj.node.frontmatter.path.split('/') : [];
-
-    let newNav = nav;
-    for (i=0;i<splitpath.length;i++) {
-      let node = {
-        title: capitalize(splitpath[i]),
-        name: splitpath[i],
-        type: 'directory',
-        path: '/' + obj.node.frontmatter.path
-      };
-      if (i == splitpath.length - 1) {
-        node.title = capitalize(obj.node.frontmatter.title);
-        node.path = obj.node.frontmatter.path ? '/' + obj.node.frontmatter.path : '/';
-        node.description = obj.node.frontmatter.description;
-        node.type = 'page';
-      }
-      newNav[splitpath[i]] = newNav[splitpath[i]] || node;
-      newNav[splitpath[i]].children = newNav[splitpath[i]].children || {};
-      newNav = newNav[splitpath[i]].children;
-    }
-
-  }
-
-}
 
 function capitalize(string) {
   return string && string[0].toUpperCase() + string.slice(1);
+}
+
+// Create slugs for files.
+exports.onCreateNode = ({ node, boundActionCreators, getNode }) => {
+  const {createNodeField} = boundActionCreators
+  let slug = '';
+  if (node.internal.type === `MarkdownRemark`) {
+
+
+    const fileNode = getNode(node.parent)
+    const parsedFilePath = parseFilepath(fileNode.relativePath)
+
+    if (parsedFilePath && parsedFilePath.dir) {
+
+      if (fileNode.sourceInstanceName === `content`) {
+        if (parsedFilePath.name !== `index` && parsedFilePath.dir !== ``) {
+          slug = `/${parsedFilePath.dir}/${parsedFilePath.name}/`
+        } else if (parsedFilePath.dir === ``) {
+          slug = `/${parsedFilePath.name}/`
+        } else {
+          slug = `/${parsedFilePath.dir}/`
+        }
+      }
+
+      if (slug) {
+        createNodeField({ node, name: `slug`, value: slug })
+      }
+    }
+  }
 }

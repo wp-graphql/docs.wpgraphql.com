@@ -9,6 +9,7 @@ module.exports = {
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-styled-components`,
     `gatsby-plugin-twitter`,
+
     {
       resolve: `gatsby-plugin-typography`,
       options: {
@@ -39,6 +40,13 @@ module.exports = {
         path: `${__dirname}/src/content`,
         name: 'content'
       }
+    },
+    `gatsby-transformer-yaml`,
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        path: `./src/pages/docs/`,
+      },
     },
     {
       resolve: 'gatsby-transformer-remark',

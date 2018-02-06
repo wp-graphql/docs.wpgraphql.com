@@ -1,21 +1,60 @@
 const visit = require('unist-util-visit')
+let React = require('react')
+let ReactDOMServer = require('react-dom/server')
+let HtmlToReactParser = require('html-to-react').Parser
 
-module.exports = ({ markdownAST }, { language = 'graphql' } = {}) => {
+module.exports = ({markdownAST}, {language = 'graphiql', theme = 'default'} = {}) => {
   visit(markdownAST, 'code', node => {
     let lang = (node.lang || '').toLowerCase()
-  if (lang === language) {
-    node.type = 'html'
-    node.value = `<div class="graphiql-playground">${node.value}</div>`
-  }
-})
-}
-
-module.exports = ({ markdownAST }, { language = 'tip' } = {}) => {
-  visit(markdownAST, 'code', node => {
-    let lang = (node.lang || '').toLowerCase()
+    console.info(`lang is ${lang}`)
     if (lang === language) {
       node.type = 'html'
-      node.value = `<div class="ant-card ant-card-bordered ant-card-wider-padding ant-card-type-inner"><div class="ant-card-head"><div class="ant-card-head-wrapper"><div class="ant-card-head-title">Inner Card title</div><div class="ant-card-extra"><a href="#">More</a></div></div></div><div class="ant-card-body"><div>>${node.value}</div></div></div>`
+
+      let lines = node.value.split('\n');
+      let firstLine = lines.shift().match(/^\s*#\s*({.*})$/);
+
+      if (firstLine) {
+        let metaData;
+        try {
+          metaData = JSON.parse(firstLine[1]);
+        } catch (e) {
+          console.error('Invalid Metadata JSON:', firstLine[1]);
+        }
+        if (metaData) {
+          let query = lines.join('\n');
+          let variables = metaData.variables ? JSON.stringify(metaData.variables, null, 2) : '';
+
+          let isValidNode = function () {
+            return true;
+          };
+
+          let processingInstructions = [
+            {
+              // Custom <h1> processing
+              shouldProcessNode: function (node) {
+
+                console.log(node)
+
+                return node && node.name === 'playground';
+              },
+              processNode: function (node, children) {
+                return `<h2>asdfasdfa</h2>`;
+              }
+            }, {
+              // Anything else
+              shouldProcessNode: function (node) {
+                return true;
+              },
+              processNode: function (node, children, index) {
+                return React.createElement('GraphiQL', {key: index}, 'Goo')
+              }
+            }];
+
+          let htmlToReactParser = new HtmlToReactParser();
+          let reactElement = htmlToReactParser.parseWithInstructions(node.value, isValidNode, processingInstructions);
+          node.value = ReactDOMServer.renderToStaticMarkup(reactElement);
+        }
+      }
     }
   })
-}
+};

@@ -1,6 +1,10 @@
 @import url('https://unpkg.com/react-instantsearch-theme-algolia@4.0.0/style.min.css');
 @import url('https://cdn.rawgit.com/PrismJS/prism-themes/master/themes/prism-base16-ateliersulphurpool.light.css');
 
+.gatsby-highlight pre[class*="language-"] {
+    background-color: rgb(244, 240, 238);
+}
+
 blockquote {
     background-color: rgba(255,229,100,0.3);
     border-left-color: #ffe564;
@@ -9,4 +13,79 @@ blockquote {
     padding: 20px 45px 20px 26px;
     margin-bottom: 30px;
     margin-top: 20px;
+}
+/** Split Pane Styles */
+.SplitPane {
+    position: relative;
+}
+.Pane {
+    padding:10px;
+}
+.Pane1 {
+    background-color: #F4F0EE;
+    overflow: auto;
+    line-break: auto;
+}
+.Pane2{
+    background-color: #262626;
+    overflow: auto;
+    line-break: auto;
+}
+.Pane2 * {
+    word-break: break-word;
+}
+
+.Pane1>*>pre,
+.Pane2>*>*>pre {
+    background-color: transparent!important;
+    border: 0!important;
+}
+.Resizer {
+   background: #000;
+   opacity: .2;
+   z-index: 1;
+   -moz-box-sizing: border-box;
+   -webkit-box-sizing: border-box;
+   box-sizing: border-box;
+   -moz-background-clip: padding;
+   -webkit-background-clip: padding;
+   background-clip: padding-box;
+}
+
+.Resizer:hover {
+    -webkit-transition: all 2s ease;
+    transition: all 2s ease;
+}
+
+.Resizer.horizontal {
+    height: 11px;
+    margin: -5px 0;
+    border-top: 5px solid rgba(255, 255, 255, 0);
+    border-bottom: 5px solid rgba(255, 255, 255, 0);
+    cursor: row-resize;
+    width: 100%;
+}
+
+.Resizer.horizontal:hover {
+    border-top: 5px solid rgba(0, 0, 0, 0.5);
+    border-bottom: 5px solid rgba(0, 0, 0, 0.5);
+}
+
+.Resizer.vertical {
+    width: 11px;
+    margin: 0 -5px;
+    border-left: 5px solid rgba(255, 255, 255, 0);
+    border-right: 5px solid rgba(255, 255, 255, 0);
+    cursor: col-resize;
+}
+
+.Resizer.vertical:hover {
+    border-left: 5px solid rgba(0, 0, 0, 0.5);
+    border-right: 5px solid rgba(0, 0, 0, 0.5);
+}
+.Resizer.disabled {
+    cursor: not-allowed;
+}
+.Resizer.disabled:hover {
+    border-color: transparent;
 }
