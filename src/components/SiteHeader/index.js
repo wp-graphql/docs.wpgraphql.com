@@ -51,24 +51,24 @@ const SiteHeader = () => (
             style={{ lineHeight: '64px', float: 'right' }}
           >
             <SubMenu title={<span> Learn</span>}>
-              <Menu.Item key="/about">
-                <Link to="/getting-started/about"><Icon type="setting" /> Getting Started</Link>
+              <Menu.Item key="/docs/getting-started/about">
+                <Link to="/docs/getting-started/about"><Icon type="setting" /> Getting Started</Link>
               </Menu.Item>
-              <Menu.Item key="/tutorials">
-                <Link to="/tutorials/exploring-graphql"><Icon type="edit" /> Tutorials</Link>
+              <Menu.Item key="/docs/extensions/wp-graphiql">
+                <Link to="/docs/extensions/wp-graphiql"><Icon type="rocket" /> Extensions</Link>
               </Menu.Item>
-              <Menu.Item key="/recipes">
-                <Link to="/recipes/posts"><Icon type="code-o" /> Recipes</Link>
+              <Menu.Item key="/docs/extending/helpful-hooks-and-filters">
+                <Link to="/docs/extending/helpful-hooks-and-filters"><Icon type="code-o" /> Extending</Link>
               </Menu.Item>
-              <Menu.Item key="/reference">
-                <Link to="/reference/actions-filters"><Icon type="book" /> Reference</Link>
+              <Menu.Item key="/docs/core-concepts/schema-and-types">
+                <Link to="/docs/core-concepts/schema-and-types"><Icon type="book" /> Core Concepts</Link>
               </Menu.Item>
-              <Menu.Item key="/faq">
-                <Link to="/faq/extending"><Icon type="question-circle-o" /> FAQ</Link>
+              <Menu.Item key="/docs/advanced/batch-requests">
+                <Link to="/docs/advanced/batch-requests"><Icon type="api" /> Advanced</Link>
               </Menu.Item>
             </SubMenu>
-            <Menu.Item key="community">
-              <Link to="/community">Community </Link>
+            <Menu.Item key="/docs/community/contributing-and-roadmap">
+              <Link to="/docs/community/contributing-and-roadmap"><Icon type="user" /> Community </Link>
             </Menu.Item>
             <Menu.Item key="blog">
               <Link to="/blog" >Blog</Link>
