@@ -61,7 +61,7 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
      */
     const allPages = result.data.allMarkdownRemark.edges;
 
-    if ( CONTEXT && CONTEXT === 'master' ) {
+    if ( process.env.CONTEXT && process.env.CONTEXT === 'production' ) {
       console.log( 'Syncing to Algolia...' );
       syncToAlgolia(result.data);
     }
