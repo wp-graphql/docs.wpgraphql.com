@@ -44,7 +44,7 @@ const IndexPage = () => (
         <Button type="primary" size="large">
           <Link to="/docs/getting-started/about" ><Icon type="file" /> Docs</Link>
         </Button>  <Button type="primary" size="large">
-          <Link to="https://github.com/wp-graphql/wp-graphql" ><Icon type="github" /> View on Github</Link>
+          <a href="https://github.com/wp-graphql/wp-graphql" target="_blank"><Icon type="github" /> View on Github</a>
       </Button>
       </Content>
     </HomePageHero>
