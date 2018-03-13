@@ -13,8 +13,9 @@ It allows users to explore a GraphQL Schema's documentation, and execute GraphQL
 
 GraphiQL itself is a React component, so to use it, you need to either implement the React component, or use something that implements it already.
 
-## GraphiQL Tools / Apps
-Below is a (non-comprehensive) list of tools that implement GraphiQL that you can use to explore and experiment with your WPGraphQL API.
+## GraphQL IDEs and Tools
+Below is a (non-comprehensive) list of tools that make it easy to interact with a GraphQL Server. You can use these 
+tools to explore and experiment with your WPGraphQL API by executing queries and mutations and exploring the schema. 
 
 * **[GraphiQL Desktop App](https://github.com/skevy/graphiql-app):** GraphiQL as an Electron desktop app
 * **[WPGraphiQL](https://github.com/wp-graphql/wp-graphiql):** WordPress plugin that adds GraphiQL to the WordPress admin dashboard 
