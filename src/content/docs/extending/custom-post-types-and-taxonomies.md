@@ -2,7 +2,7 @@
 title: Custom Post Types and Taxonomies
 ---
 
-# Exposing Custom Post Types in WPGraphQl
+# Exposing Custom Post Types in WPGraphQL
 
 Adding Custom Post Types to the WPGraphQL schema is simple. When registering a post_type simply declare `show_in_graphql` as true and provide a `graphql_single_name` and `graphql_plural_name`. 
 
