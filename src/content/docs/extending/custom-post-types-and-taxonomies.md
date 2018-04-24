@@ -104,7 +104,7 @@ query GET_GENRES {
 
 Here we can get a list of Genre terms, and on each term we can get a list of connected books. 
 
-Alternatively you can get a list of books and conmected genres:
+Alternatively you can get a list of books and connected genres:
 
 ```
 query GET_BOOKS {
