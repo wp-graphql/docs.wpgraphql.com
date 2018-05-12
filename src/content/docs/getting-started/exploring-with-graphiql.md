@@ -21,7 +21,7 @@ tools to explore and experiment with your WPGraphQL API by executing queries and
 * **[WPGraphiQL](https://github.com/wp-graphql/wp-graphiql):** WordPress plugin that adds GraphiQL to the WordPress admin dashboard 
 * **[GraphQL Playground](https://github.com/graphcool/graphql-playground/releases):** Desktop App from the folks at Graph.Cool.
 * **[GraphQL IDE](https://github.com/andev-software/graphql-ide):** Desktop App that supports multiple endpoint configurations
-* **[Altair](https://altair.sirmuel.design):** Multiple Platforms (Chrome & Firefox extension, Mac, Windows, Linux and more)
+* **[Altair](https://altair.sirmuel.designh):** Multiple Platforms (Chrome & Firefox extension, Mac, Windows, Linux and more)
 * **[ChromiQL](https://chrome.google.com/webstore/detail/chromeiql/fkkiamalmpiidkljmicmjfbieiclmeij?hl=en):** Chrome Extension
 
 > ### "This Guide References the GraphiQL Desktop App"
