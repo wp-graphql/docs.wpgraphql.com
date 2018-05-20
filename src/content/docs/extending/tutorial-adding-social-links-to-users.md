@@ -21,6 +21,7 @@ In order to accomplish what we're after, we need to do 3 things:
 - hook into the user mutation to handle the input data to be saved
 
 ### Step 1: expose fields to be queryable on the User type
+
 ```
 add_filter( 'graphql_user_fields', function( $fields ) {
 
