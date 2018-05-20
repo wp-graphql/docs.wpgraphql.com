@@ -43,7 +43,7 @@
       link: /docs/extending/overriding-field-resolvers
     - title: Testing Your Extensions
       link: /docs/extending/testing-extensions
-    - title: Tutorial: Adding Social Links to Users
+    - title: "Tutorial: Adding Social Links to Users"
       link: /docs/extending/tutorial-adding-social-links-to-users
 - title: Core Concepts
   section: /docs/core-concepts
