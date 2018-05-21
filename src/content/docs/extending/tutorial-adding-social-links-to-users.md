@@ -1,5 +1,5 @@
 ---
-title: "Tutorial\: Adding Social Links to Users"
+title: "Tutorial: Adding Social Links to Users"
 description: "Learn to add social links to users that can be queried and mutated"
 ---
 
