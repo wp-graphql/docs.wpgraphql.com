@@ -62,6 +62,7 @@ const SiteHeader = () => (
               </Menu.Item>
               <Menu.Item key="/docs/core-concepts/schema-and-types">
                 <Link to="/docs/core-concepts/schema-and-types"><Icon type="book" /> Core Concepts</Link>
+                <Link to="/docs/core-concepts/schema-and-types"><Icon type="book" /> Core Concepts</Link>
               </Menu.Item>
               <Menu.Item key="/docs/advanced/batch-requests">
                 <Link to="/docs/advanced/batch-requests"><Icon type="api" /> Advanced</Link>
@@ -71,7 +72,7 @@ const SiteHeader = () => (
               <Link to="/docs/community/contributing-and-roadmap"><Icon type="user" /> Community </Link>
             </Menu.Item>
             <Menu.Item key="blog">
-              <Link to="/blog" >Blog</Link>
+              <Link to="https://wpgraphql.blog" >Blog</Link>
             </Menu.Item>
             <Menu.Item key="github">
               <a href="https://github.com/wp-graphql/wp-graphql" target="_blank">Github <Icon type="github" /></a>
