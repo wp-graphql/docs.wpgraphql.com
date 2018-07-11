@@ -72,7 +72,7 @@ const SiteHeader = () => (
               <Link to="/docs/community/contributing-and-roadmap"><Icon type="user" /> Community </Link>
             </Menu.Item>
             <Menu.Item key="blog">
-              <Link to="https://wpgraphql.blog" >Blog</Link>
+              <a href="https://wpgraphql.blog" >Blog</a>
             </Menu.Item>
             <Menu.Item key="github">
               <a href="https://github.com/wp-graphql/wp-graphql" target="_blank">Github <Icon type="github" /></a>
