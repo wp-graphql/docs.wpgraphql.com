@@ -43,7 +43,7 @@ query GET_BOOKS {
 
 Exposing custom taxonomies in WPGraphQL is simple. Much like custom post types, just 3 fields need to be added to the taxonomy registry.
 
-For example, here's how you could register a "Genre" Taxonomy that would be connexted to the "Books" post type:
+For example, here's how you could register a "Genre" Taxonomy that would be connected to the "Books" post type:
 
 ```
 add_action( 'init', function() {
