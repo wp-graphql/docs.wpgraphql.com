@@ -52,7 +52,7 @@ Once the plugin is active, your site should have a `yoursite.com/graphql` endpoi
 }
 ```
 
-<Warning>If things aren't working at this point, you may need to [flush permalinks](http://localhost:8000/getting-started/install-and-activate#flush-permalinks)</Warning>
+<Warning>If things aren't working at this point, you may need to [flush permalinks](https://codex.wordpress.org/Function_Reference/flush_rewrite_rules)</Warning>
 
 ### Flush Permalinks
 
