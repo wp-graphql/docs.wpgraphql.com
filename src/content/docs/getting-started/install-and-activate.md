@@ -37,7 +37,7 @@ Once the plugin is in the WordPress plugins directory, it can be activated by cl
 ### Verify the Endpoint Works
 The most common use of WPGraphQL is as an API endpoint that can be accessed via HTTP requests (although it can be used without remote HTTP requests as well)
 
-In order for the /graphql endpoint to work, you must have [pretty permalinks](https://codex.wordpress.org/Using_Permalinks) enabled and any permalink structure other than the default WordPress permalink structure.
+In order for the /graphql endpoint to work, you must have [pretty permalinks](#flush-permalinks) enabled and any permalink structure other than the default WordPress permalink structure.
 
 Once the plugin is active, your site should have a `yoursite.com/graphql` endpoint and you the **expected response** is a JSON payload like so:
 
