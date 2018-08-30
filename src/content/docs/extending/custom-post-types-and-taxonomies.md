@@ -4,7 +4,7 @@ title: Custom Post Types and Taxonomies
 
 # Exposing Custom Post Types in WPGraphQL
 
-Adding Custom Post Types to the WPGraphQL schema is simple. When registering a post_type simply declare `show_in_graphql` as true and provide a `graphql_single_name` and `graphql_plural_name`. 
+Adding Custom Post Types to the WPGraphQL schema is simple. When registering a post type simply declare `show_in_graphql` as true and provide a `graphql_single_name` and `graphql_plural_name`. 
 
 For example: 
 
@@ -21,7 +21,7 @@ add_action( 'init', function() {
 } );
 ```
 
-This will register a "books" post_type to your WordPress site and will expose the post_type to your GraphQl schema. 
+This will register a "books" post type to your WordPress site and will expose the post type to your GraphQl schema. 
 
 You could now run this query on your site:
 
@@ -76,7 +76,7 @@ query GET_GENRES {
 
 ## Post Type and Taxonomy Connections
 
-When you register a post_type and taxonomy to be connexted in WordPress, like we've registered the Genre taxonomy to be connected to the Book post_type, WPGraphQL makes use of the connection to expose fields on each of the types so you can easily query for connected data.
+When you register a post type and taxonomy to be connected in WordPress, like we've registered the Genre taxonomy to be connected to the Book post type, WPGraphQL makes use of the connection to expose fields on each of the types so you can easily query for connected data.
 
 For example: 
 
