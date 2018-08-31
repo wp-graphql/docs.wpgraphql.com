@@ -9,16 +9,20 @@ Adding Custom Post Types to the WPGraphQL schema is simple. When registering a p
 For example: 
 
 ```
-add_action( 'init', function() {
-	register_post_type( 'book', [
-		'label' => __( 'Books', 'wp-graphql-publishers' ),
-		'supports' => [ 'title', 'editor' ],
-		'public' => true,
-		'show_in_graphql' => true,
-		'graphql_single_name' => 'book',
-		'graphql_plural_name' => 'books',
-	] );
-} );
+add_action(
+  'init', function () {
+    register_post_type(
+      'book', [
+        'label'               => __( 'Books', 'wp-graphql-publishers' ),
+        'supports'            => [ 'title', 'editor' ],
+        'public'              => true,
+        'show_in_graphql'     => true,
+        'graphql_single_name' => 'book',
+        'graphql_plural_name' => 'books',
+      ]
+    );
+  }
+);
 ```
 
 This will register a "books" post type to your WordPress site and will expose the post type to your GraphQl schema. 
@@ -46,16 +50,21 @@ Exposing custom taxonomies in WPGraphQL is simple. Much like custom post types, 
 For example, here's how you could register a "Genre" Taxonomy that would be connected to the "Books" post type:
 
 ```
-add_action( 'init', function() {
-	register_taxonomy( 'genre', 'book', [
-		'label' => __( 'Genre' ),
-		'public' => true,
-		'show_in_graphql' => true,
-		'graphql_single_name' => 'genre',
-		'graphql_plural_name' => 'genres',
-		'hierarchical' => true,
-	]);
-} );
+add_action(
+  'init', function() {
+    register_taxonomy(
+      'genre',
+      'book', [
+        'label'               => __( 'Genre' ),
+        'public'              => true,
+        'show_in_graphql'     => true,
+        'graphql_single_name' => 'genre',
+        'graphql_plural_name' => 'genres',
+        'hierarchical'        => true,
+      ]
+    );
+  }
+);
 ```
 
 This would allow for a query like so:
