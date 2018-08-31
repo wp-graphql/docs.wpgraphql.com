@@ -85,9 +85,9 @@ query GET_GENRES {
 
 ## Post Type and Taxonomy Connections
 
-When you associate a taxonomy with a post type, like _genre_ and _book_, WPGraphQL uses that association to establish a connection between the two objects. This allows you to query related objects as part of the same call.
+When you register a post type and taxonomy to be connected in WordPress, like we've registered the Genre taxonomy to be connected to the Book post type, WPGraphQL makes use of the connection to expose fields on each of the types so you can easily query for connected data.
 
-For example, we can get a list of Genre terms, and on each term we can get a list of connected books:
+For example: 
 
 ```
 query GET_GENRES {
@@ -110,6 +110,8 @@ query GET_GENRES {
   }
 }
 ```
+
+Here we can get a list of Genre terms, and on each term we can get a list of connected books. 
 
 Alternatively you can get a list of books and connected genres:
 
@@ -135,3 +137,26 @@ query GET_BOOKS {
 }
 ```
 
+Or, we can get a list of Genre terms, and on each term a list of connected books that have the title _Moby Dick_. 
+
+```
+query GET_GENRES_BY_BOOK {
+  genres {
+    edges {
+      node {
+        genreId
+        name
+        description
+        books(where: {title: "Moby Dick"}) {
+          edges {
+            node {
+              bookId
+              title
+            }
+          }
+        }
+      }
+    }
+  }
+}
+```
