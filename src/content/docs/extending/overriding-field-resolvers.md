@@ -1,3 +1,0 @@
----
-title: Overriding Field Resolvers
----
