@@ -1,0 +1,80 @@
+- title: Quick Start
+  directory: quick-start
+  icon: thunderbolt
+  items:
+    - id: install-and-activate
+      title: Install and Activate
+    - id: posts
+      title: Posts
+    - id: pages
+      title: Pages
+    - id: custom-post-types
+      title: Custom Post Types
+    - id: categories-and-tags
+      title: Categories & Tags
+    - id: custom-taxonomies
+      title: Custom Taxonomies
+    - id: users
+      title: Users
+    - id: plugins
+      title: Plugins
+    - id: themes
+      title: Themes
+    - id: settings
+      title: Settings
+- title: Guides
+  directory: guides
+  icon: read
+  items:
+    - id: about-wpgraphql
+      title: About WPGraphQL
+    - id: interacting-with-wpgraphql
+      title: Interacting with WPGraphQL
+    - id: the-graphql-query-language
+      title: The GraphQL Query Language
+    - id: relay-spec
+      title: Relay Spec (Edges & Nodes)
+    - id: anatomy-of-a-graphql-request
+      title: Anatomy of a GraphQL Request
+    - id: upgrading
+      title: Upgrading
+- title: API Reference
+  directory: api-reference
+  icon: code
+  items:
+    - id: types
+      title: Types
+    - id: fields
+      title: Fields
+    - id: connections
+      title: Connections
+    - id: mutations
+      title: Mutations
+    - id: interfaces
+      title: Interfaces
+    - id: resolvers
+      title: Resolvers
+    - id: hooks-and-filters
+      title: Hooks and Filters
+- title: Extensions
+  directory: extensions
+  icon: api
+  items:
+    - id: wpgraphql-advanced-custom-fields
+      title: WPGraphQL for Advanced Custom Fields
+    - id: wpgraphql-woocommerce
+      title: WPGraphQL for WooCommerce
+    - id: wpgraphql-tax-query
+      title: WPGraphQL Tax Query
+    - id: wpgraphql-meta-query
+      title: WPGraphQL Meta Query
+    - id: wpgraphql-insights
+      title: WPGraphQL Insights
+    - id: wpgraphql-dad-jokes
+      title: WPGraphQL Dad Jokes
+    - id: wpgraphql-jwt-authentication
+      title: WPGraphQL JWT Authentication
+    - id: wpgraphiql
+      title: WPGraphiQL
+    - id: wpgraphql-content-blocks
+      title: WPGraphQL Content Blocks

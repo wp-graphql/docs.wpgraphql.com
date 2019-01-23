@@ -4,13 +4,13 @@ import SiteLayout from '../components/SiteLayout'
 import Seo from '../components/Seo'
 import Container from '../components/Container'
 
-const IndexPage = ({location}) => (
+const Blog = ({location}) => (
   <SiteLayout location={location}>
-    <Seo title="Home" keywords={[`gatsby`, `application`, `react`]} />
+    <Seo title="Blog" />
     <Container>
-      <h1>Homepage. . .still needs to be built out...</h1>
+      <h1>Blog page...still needs to be built out</h1>
     </Container>
   </SiteLayout>
 )
 
-export default IndexPage
+export default Blog

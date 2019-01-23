@@ -1,0 +1,20 @@
+---
+title: About WPGraphQL
+description: Learn about the WPGraphQL Plugin
+---
+
+import Note from '../../../components/Note'
+
+## About GraphQL
+
+[GraphQL](https://graphql.org/) is a [spec](https://facebook.github.io/graphql/) for a Query Language for application data graphs. GraphQL isn’t tied to any specific database or storage engine and is instead backed by your existing code and data. As GraphQL is a spec, there are implementations in [nearly every language](https://github.com/chentsulin/awesome-graphql#lib), and for many different systems.
+
+GraphQL is centered around a strongly typed [Schema](https://graphql.org/learn/schema/). The GraphQL Schema is composed of [Types](https://graphql.org/learn/schema/#type-system), and Types are composed of [fields](https://graphql.org/learn/schema/#object-types-and-fields). Fields are defined with Type that they should resolve to. Field’s can be defined as a [Scalar](https://graphql.org/learn/schema/#scalar-types) Type (string, integer, boolean, float), or another Type.
+
+These concepts might be hard to grasp right now, but as you continue exploring the docs, they should start to make more sense.
+
+## How WPGraphQL Brings GraphQL to WordPress
+
+WPGraphQL is built atop the [GraphQL-PHP](http://webonyx.github.io/graphql-php/) library and provides an executable, extendable Schema and resolvers for your WordPress site.
+
+WPGraphQL takes advantages of the various static registries in WordPress, such as the Post Type, Taxonomy and Settings registries to build a Schema for your WordPress site.
