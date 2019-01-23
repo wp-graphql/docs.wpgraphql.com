@@ -1,9 +1,9 @@
 {
-  "name": "gatsby-starter-default",
-  "private": true,
-  "description": "A simple starter to get up and developing quickly with Gatsby",
+  "name": "WPGraphQL.com",
+  "private": false,
+  "description": "Website for WPGraphQL",
   "version": "0.1.0",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "author": "Jason Bahl <jasonbahl@mac.com>",
   "dependencies": {
     "@mdx-js/mdx": "^0.16.6",
     "@mdx-js/tag": "^0.16.6",
@@ -19,7 +19,7 @@
     "gatsby-plugin-manifest": "^2.0.9",
     "gatsby-plugin-offline": "^2.0.16",
     "gatsby-plugin-react-helmet": "^3.0.2",
-    "gatsby-plugin-sharp": "^2.0.17",
+    "gatsby-plugin-sharp": "^2.0.16",
     "gatsby-remark-copy-linked-files": "^2.0.8",
     "gatsby-remark-images": "^3.0.1",
     "gatsby-source-filesystem": "^2.0.8",
@@ -35,8 +35,7 @@
     "react-helmet": "^5.2.0",
     "react-instantsearch": "^5.3.2",
     "react-live": "^1.12.0",
-    "react-syntax-highlighter": "^10.1.2",
-    "tocbot": "^4.4.3"
+    "react-syntax-highlighter": "^10.1.2"
   },
   "keywords": [
     "gatsby"
@@ -51,7 +50,7 @@
   },
   "devDependencies": {
     "@mdx-js/loader": "^0.16.6",
-    "loader-utils": "^1.2.3",
+    "loader-utils": "^1.2.0",
     "prettier": "^1.15.2"
   },
   "repository": {
