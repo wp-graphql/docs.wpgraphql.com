@@ -1,129 +1,106 @@
-'use strict';
+/**
+ * Implement Gatsby's Node APIs in this file.
+ *
+ * See: https://www.gatsbyjs.org/docs/node-apis/
+ */
 
-const path = require("path");
-const parseFilepath = require(`parse-filepath`);
-const { syncToAlgolia } = require('./node/algoliasync');
+// You can delete this file if you're not using it
+const path = require(`path`);
+const { createFilePath } = require(`gatsby-source-filesystem`);
 
-exports.createPages = ({ boundActionCreators, graphql }) => {
-  const { createPage } = boundActionCreators;
-
-  const docTemplate = path.resolve(`src/templates/documentation.js`);
-
+exports.createPages = ({graphql, actions}) => {
+  const { createPage } = actions;
+  const docTemplate = path.resolve(`./src/templates/doc.js`);
   return graphql(`
-    query getAllMarkdown {
-      allMarkdownRemark(limit: 1000, sort: {order: ASC, fields: [fileAbsolutePath]}, filter: {fileAbsolutePath: {regex: "//content/docs//"}}) {
+    query ALL_MARKDOWN_PAGES {
+      allMdx {
         edges {
-          previous {
-            id
-            fields {
-              slug
-            }
-            frontmatter {
-              title
-              description
-            }
-          }
           node {
-            fileAbsolutePath
-            fields {
-              slug
-            }
             id
-            shortExcerpt:excerpt(pruneLength:100)
-            excerpt(pruneLength:1000)
-            html
-            timeToRead
-            frontmatter {
-              title
-              description
-            }
+            fileAbsolutePath
           }
           next {
             id
+            frontmatter {
+              title
+            }
             fields {
               slug
             }
+          }
+          previous {
+            id
             frontmatter {
               title
-              description
+            }
+            fields {
+              slug
             }
           }
         }
       }
-    }
-  `).then(result => {
-    if (result.errors) {
-      return Promise.reject(result.errors);
-    }
+    }   
+  `).then( result => {
 
-    /**
-     * Get all the pages from the GraphQL Request
-     */
-    const allPages = result.data.allMarkdownRemark.edges;
-
-    if ( process.env.CONTEXT && process.env.CONTEXT === 'production' ) {
-      console.log( 'Syncing to Algolia...' );
-      syncToAlgolia(result.data);
+    if ( result.errors ) {
+      throw result.errors
     }
 
-    /**
-     * Creates the pages
-     */
-    allPages.forEach(({ node, next, previous } ) => {
+    const docs = result.data.allMdx.edges;
 
-      let path = node.fields && node.fields.slug ? node.fields.slug : '/';
+    docs.forEach((doc, index) => {
 
-      if ( path ) {
+      const regex = /content\/docs\/([\w\-\/]+)/gm;
+      const str = doc.node.fileAbsolutePath;
+      let path = regex.exec(str);
 
-        /**
-         * Create the page, passing context that can be used
-         * by GraphQL Variables in page level GraphQL Queries
-         */
+      if ( path && path.length && path[1] ) {
+
         createPage({
-          path: path,
+          path: `/docs/${path[1]}`,
           component: docTemplate,
           context: {
-            path: path,
-            node: node,
-          },
-        });
-
+            id: doc.node.id,
+            fileAbsolutePath: doc.node.fileAbsolutePath,
+            next: doc.next ? doc.next : null,
+            prev: doc.previous ? doc.previous : null
+          }
+        })
       }
 
     });
-  });
-};
 
-
-function capitalize(string) {
-  return string && string[0].toUpperCase() + string.slice(1);
+  })
 }
 
-// Create slugs for files.
-exports.onCreateNode = ({ node, boundActionCreators, getNode }) => {
-  const {createNodeField} = boundActionCreators
-  let slug = '';
-  if (node.internal.type === `MarkdownRemark`) {
+exports.onCreateNode = ({ node, actions, getNode }) => {
+  const { createNodeField } = actions;
 
 
-    const fileNode = getNode(node.parent)
-    const parsedFilePath = parseFilepath(fileNode.relativePath)
+  if (node.internal.type === "Mdx") {
 
-    if (parsedFilePath && parsedFilePath.dir) {
+    const value = createFilePath({node, getNode});
+    const {relativePath, sourceInstanceName} = getNode(node.parent);
 
-      if (fileNode.sourceInstanceName === `content`) {
-        if (parsedFilePath.name !== `index` && parsedFilePath.dir !== ``) {
-          slug = `/${parsedFilePath.dir}/${parsedFilePath.name}/`
-        } else if (parsedFilePath.dir === ``) {
-          slug = `/${parsedFilePath.name}/`
-        } else {
-          slug = `/${parsedFilePath.dir}/`
-        }
-      }
+    /**
+     * Create a URL friendly slug
+     */
+    createNodeField({
+      name: 'slug',
+      node,
+      value
+    });
 
-      if (slug) {
-        createNodeField({ node, name: `slug`, value: slug })
-      }
-    }
+    /**
+     * Creates the path to the file. Helpful for use in linking to the source
+     * file in the Github repo for `edit this page` links, etc
+     */
+    createNodeField({
+      node,
+      name: 'path',
+      value: path.join(sourceInstanceName, relativePath),
+    });
+
   }
+
 }

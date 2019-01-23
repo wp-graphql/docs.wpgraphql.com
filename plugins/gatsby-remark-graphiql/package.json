@@ -1,6 +1,0 @@
-{
-  "name": "gatsby-remark-graphiql",
-  "dependencies": {
-    "unist-util-visit": "^1.1.3"
-  }
-}

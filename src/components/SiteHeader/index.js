@@ -1,90 +1,165 @@
-import React from 'react'
-import Link from 'gatsby-link'
-import { Layout, Menu, Icon, Row, Col } from 'antd'
-import logo from '../../assets/img/logo-horizontal.png'
-import styled from 'styled-components'
-import Search from '../Search'
-const { Header } = Layout;
-const SubMenu = Menu.SubMenu;
+import PropTypes from 'prop-types'
+import React, { Component } from 'react'
+import {
+  Layout, Menu, Row, Button, Icon
+} from 'antd'
+import Container from '../Container'
+import { StaticQuery, graphql, navigate, Link } from 'gatsby'
+import SiteSearch from '../SiteSearch'
+import logo from '../../images/icon.png'
 
-const Logo = styled.div`
-  display:flex;
-  justify-content: left;
-  align-items: center;
-  height:64px;
-  >a{
-    display:flex;
-    justify-content: center;
-    align-items: center;
-  }
-  >*>img {
-    height 30px;
-    width: auto;
-    margin: 0;
-  }
-`;
+const ButtonGroup = Button.Group
 
-const SiteHeader = () => (
-  <div style={{background:'#001529'}}>
-    <Row>
-      <Col xxl={0} xl={0} lg={0} md={0} sm={24} xs={24}>
-        <Logo>
-          <Link to="/" >
-            <img src={logo} />
-          </Link>
-        </Logo>
-      </Col>
-    </Row>
-    <Header className="header" >
-      <Row>
-        <Col xxl={4} xl={5} lg={5} md={6} sm={0} xs={0}>
-          <Logo>
-            <Link to="/" >
-              <img src={logo} />
-            </Link>
-          </Logo>
-        </Col>
-        <Col xxl={16} xl={15} lg={10} md={14} sm={24} xs={24}>
-          <Menu
-            theme="dark"
-            mode="horizontal"
-            style={{ lineHeight: '64px', float: 'right' }}
-          >
-            <SubMenu title={<span> Learn</span>}>
-              <Menu.Item key="/docs/getting-started/about">
-                <Link to="/docs/getting-started/about"><Icon type="setting" /> Getting Started</Link>
-              </Menu.Item>
-              <Menu.Item key="/docs/extensions/wp-graphiql">
-                <Link to="/docs/extensions/wp-graphiql"><Icon type="rocket" /> Extensions</Link>
-              </Menu.Item>
-              <Menu.Item key="/docs/extending/helpful-hooks-and-filters">
-                <Link to="/docs/extending/helpful-hooks-and-filters"><Icon type="code-o" /> Extending</Link>
-              </Menu.Item>
-              <Menu.Item key="/docs/core-concepts/schema-and-types">
-                <Link to="/docs/core-concepts/schema-and-types"><Icon type="book" /> Core Concepts</Link>
-                <Link to="/docs/core-concepts/schema-and-types"><Icon type="book" /> Core Concepts</Link>
-              </Menu.Item>
-              <Menu.Item key="/docs/advanced/batch-requests">
-                <Link to="/docs/advanced/batch-requests"><Icon type="api" /> Advanced</Link>
-              </Menu.Item>
-            </SubMenu>
-            <Menu.Item key="/docs/community/contributing-and-roadmap">
-              <Link to="/docs/community/contributing-and-roadmap"><Icon type="user" /> Community </Link>
+const {
+  Header,
+} = Layout
+
+const Logo = () => (
+    <Link to="/" style={{
+      marginRight: '20px'
+    }}>
+      <img src={logo} alt="" height="40" />
+    </Link>
+)
+
+const menuItems = [
+  {
+    name: 'Docs',
+    path: '/docs/quick-start/install-and-activate',
+    key: '/docs'
+  },
+  {
+    name: 'Community',
+    path: '/community'
+  },
+  {
+    name: 'Blog',
+    path: '/blog'
+  }
+];
+
+class SiteMenu extends Component {
+
+  getSelectedKeys = () => {
+    const { location } = this.props;
+
+    if ( ! location || ! location.pathname ) {
+      return null;
+    }
+
+    if ( location.pathname.includes( '/docs') ) {
+      return ['/docs']
+    }
+
+    if ( location.pathname.includes( '/community') ) {
+      return ['/community']
+    }
+
+    if ( location.pathname.includes( '/blog') ) {
+      return ['/blog']
+    }
+
+    return [];
+
+  }
+
+  render() {
+    return (
+      <div style={{
+        maxWidth: '600px',
+      }}>
+        <Menu
+          theme="dark"
+          mode="horizontal"
+          defaultSelectedKeys={['/docs']}
+          selectedKeys={this.getSelectedKeys()}
+          style={{ lineHeight: '64px', borderBottom: '0px' }}
+        >
+          {menuItems.map(item => (
+            <Menu.Item
+              key={ item.key ? item.key : item.path}
+              onClick={() => navigate(item.path)}
+            >
+              {item.name}
             </Menu.Item>
-            <Menu.Item key="blog">
-              <a href="https://wpgraphql.blog" >Blog</a>
-            </Menu.Item>
-            <Menu.Item key="github">
-              <a href="https://github.com/wp-graphql/wp-graphql" target="_blank">Github <Icon type="github" /></a>
-            </Menu.Item>
-          </Menu>
-        </Col>
-        <Col xxl={4} xl={4} lg={9} md={4} sm={0} xs={0}>
-          <Search/>
-        </Col>
+          ))}
+        </Menu>
+      </div>
+    )
+  }
+}
+
+const UtilNav = () => {
+  return (
+    <StaticQuery query={graphql`
+      query GithubInfo {
+        github {
+          repository(owner: "wp-graphql", name: "wp-graphql") {
+            id
+            name
+            resourcePath
+            releases(first: 1, orderBy: {field: CREATED_AT, direction: DESC}) {
+              nodes {
+                id
+                name
+                url
+              }
+            }
+          }
+        }
+      }
+    `}
+     render={data => {
+       const { github: { repository: { resourcePath, releases: { nodes } } } } = data
+       let version = null
+       if (nodes && nodes.length) {
+         version = nodes[0].name
+       }
+       return (
+         <div>
+           <ButtonGroup>
+             <Button onClick={() => window.open(nodes[0].url)} type="default">
+               {version} <Icon type="branches"/>
+             </Button>
+             <Button onClick={() => window.open(`https://github.com/${resourcePath}`)}
+                     type="default">
+               <Icon type="github"/> Github
+             </Button>
+           </ButtonGroup>
+         </div>
+       )
+
+     }}/>
+  )
+}
+
+const SiteHeader = ({ siteTitle, location }) => (
+  <Header style={{ padding: 0, height: '66px', position: 'fixed', zIndex: 99, width: '100%' }}>
+    <Container>
+      <Row type="flex" justify="space-between">
+        <div className="logo-menu">
+          <Row type="flex" justify="start">
+            <Logo siteTitle={siteTitle}/>
+            <SiteMenu location={location} />
+          </Row>
+        </div>
+        <div className="search-util">
+          <Row type="flex" justify="end">
+            <SiteSearch />
+            <UtilNav/>
+          </Row>
+        </div>
       </Row>
-    </Header>
-  </div>
-);
+    </Container>
+  </Header>
+)
 
-export default SiteHeader;
+SiteHeader.propTypes = {
+  siteTitle: PropTypes.string,
+}
+
+SiteHeader.defaultProps = {
+  siteTitle: ``,
+}
+
+export default SiteHeader

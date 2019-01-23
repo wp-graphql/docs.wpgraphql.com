@@ -1,3 +1,0 @@
----
-title: Integration Testing Extensions
----
