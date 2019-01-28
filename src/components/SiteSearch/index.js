@@ -75,7 +75,7 @@ class Search extends Component{
     return ! shouldRender ? null : (
       <InstantSearch
         appId="0OQW7P3CWR"
-        apiKey="7c453e20d23c2c68916cd301063ff8f7"
+        apiKey="5d6dae16e612276e35723bfdc952a47b"
         indexName="wpgraphql_gatsby"
       >
         <ConnectedSearch />

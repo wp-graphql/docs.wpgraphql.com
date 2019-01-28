@@ -1,9 +1,13 @@
-- title: Quick Start
-  directory: quick-start
+- title: Getting Started
+  directory: getting-started
   icon: thunderbolt
   items:
     - id: install-and-activate
       title: Install and Activate
+    - id: intro-to-graphql
+      title: Intro to GraphQL
+    - id: interacting-with-wpgraphql
+      title: Interacting with WPGraphQL
     - id: posts
       title: Posts
     - id: pages
@@ -28,8 +32,6 @@
   items:
     - id: about-wpgraphql
       title: About WPGraphQL
-    - id: interacting-with-wpgraphql
-      title: Interacting with WPGraphQL
     - id: the-graphql-query-language
       title: The GraphQL Query Language
     - id: relay-spec

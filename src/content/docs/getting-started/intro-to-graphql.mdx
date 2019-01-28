@@ -1,0 +1,133 @@
+---
+title: Intro to GraphQL
+description: Intro to the GraphQL Query language
+---
+
+import Note from '../../../components/Note'
+import GraphiQL from '../../../components/GraphiQL'
+
+On this page, we'll look at some of the features of the GraphQL specification and Query Language.
+After reading this page, you should have a basic understanding of how to interact with a WPGraphQL
+server.
+
+## Queries
+
+To get started understanding GraphQL, it's best to look at an example of a GraphQL Query.
+
+### Hello World
+
+This is essentially the "hello world" of GraphQL queries for a site running WPGraphQL. This query
+asks for `generalSettings`, and on `generalSettings`, it's asking for the field `url`.
+
+```graphql
+{
+ generalSettings {
+   url
+ }
+}
+```
+The response to this query would look like:
+
+```json
+{
+  "data": {
+    "generalSettings": {
+      "url": "https://www.wpgraphql.com"
+    }
+  }
+}
+```
+
+We can see that the results match the shape of the query. We get exactly what we asked for, and
+nothing more. This is a huge feature! Not only does this **give clients control** by asking for the
+exact data they need, it means the **data is predictable** which can lead to **fewer bugs** in your
+applications, it means the **data download sizes are smaller** because it only includes the specified
+fields, and it also means the **server can be more efficient** as it can do the minimum work necessary
+to get the data the client asked for.
+
+### Interactive GraphiQL IDE
+
+Let's take a look at the same query in an interactive GraphQL IDE.
+
+<Note>
+Throughout this guide, you will see this embedded GraphiQL editor which allows you to execute real
+GraphQL queries against a live WordPress site running WPGraphQL.
+
+Click the pulsating red dot to take a tour of the GraphiQL editor.
+</Note>
+
+<GraphiQL
+    query="
+    {
+     generalSettings {
+       url
+     }
+    }
+    "
+    showJoyride={true}
+    withDocs={false}
+/>
+
+## Exploring the Schema
+
+Ok, cool, we can query for the url of the site, but what else can we do with GraphQL? How can we find
+out what other data is available to query?
+
+### Schema Docs
+
+<Note title="Documentation Explorer" type="info">
+One of the easiest ways to explore what is available to be queried, is by exploring the Schema using
+the Documentation explorer in GraphiQL.
+</Note>
+
+**Go ahead, click the "Docs" button, then explore by typing in the "search schema" field, or clicking
+on fields or types**
+
+<GraphiQL
+    query="
+    {
+     generalSettings {
+       url
+     }
+    }
+    "
+    withDocs={true}
+    showJoyride={'docsOnly'}
+/>
+
+<Note type="warning">
+Note: Not all instances of the interactive GraphiQL editor in these docs will have the Documentation
+explorer available to keep distractions to a minimum as you work through examples.
+</Note>
+
+### Self-documenting Schema
+
+Since GraphQL is built on a strong [Type](https://graphql.org/learn/schema/#type-system) system the
+Schema is self-documenting and queryable, meaning you can query the Schema itself!
+
+The Schema is self-documenting, meaning that as you register Fields and Types to the Schema, you
+can provide descriptions in the definitions and those are exposed to the Schema for documentation
+purposes.
+
+The Schema is queryable, meaning that it's not just one static thing. You can query the Schema as
+an interactive thing. Here's an example:
+
+<GraphiQL
+  query="
+  {
+    __schema {
+      types {
+        fields {
+          name
+          type {
+            kind
+          }
+          description
+        }
+      }
+    }
+  }
+  "
+/>
+
+## Mutations

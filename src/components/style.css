@@ -29,6 +29,13 @@ p {
     margin-top: 15px;
 }
 
+.docsnav-anchor {
+    z-index: 9;
+    margin-bottom: 200px;
+}
+.docsnav-anchor .ant-anchor {
+    padding-bottom: 150px;
+}
 .docsnav-anchor .ant-anchor-ink {
     display: none;
 }

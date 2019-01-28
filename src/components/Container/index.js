@@ -3,7 +3,7 @@ import { Row, Col } from 'antd'
 
 const Container = ({children}) => (
     <Row type="flex" justify="center">
-        <Col span={18} >
+        <Col  xs={24} lg={24} xl={20} >
              {children}
         </Col>
     </Row>

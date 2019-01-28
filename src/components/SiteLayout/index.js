@@ -24,14 +24,21 @@ const SiteLayout = ({ children, location = null }) => (
         <SiteHeader location={location} siteTitle={data.site.siteMetadata.title} />
         <div style={{ marginTop: '66px' }}>
           {children}
+          <footer style={{
+            width: '100%',
+            padding: '40px 0',
+            background: '#eaeaea',
+            zIndex: 9,
+            position: 'relative'
+          }}>
+            <Container>
+              © {new Date().getFullYear()}, Built with
+              {` `}
+              <a href="https://www.gatsbyjs.org">Gatsby</a>
+            </Container>
+          </footer>
         </div>
-        <footer>
-          <Container>
-            © {new Date().getFullYear()}, Built with
-            {` `}
-            <a href="https://www.gatsbyjs.org">Gatsby</a>
-          </Container>
-        </footer>
+
       </Layout>
     )}
   />
