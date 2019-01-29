@@ -4,10 +4,10 @@
   items:
     - id: install-and-activate
       title: Install and Activate
-    - id: intro-to-graphql
-      title: Intro to GraphQL
     - id: interacting-with-wpgraphql
       title: Interacting with WPGraphQL
+    - id: intro-to-graphql
+      title: Intro to GraphQL
     - id: posts
       title: Posts
     - id: pages
@@ -40,8 +40,20 @@
       title: Anatomy of a GraphQL Request
     - id: upgrading
       title: Upgrading
-- title: API Reference
-  directory: api-reference
+    - id: authentication-and-authorization
+      title: Authentication and Authorization
+    - id: debugging
+      title: Debugging
+    - id: deferred-resolvers
+      title: Deferred Resolvers
+    - id: query-batching
+      title: Query Batching
+    - id: contributing
+      title: Contributing
+    - id: testing
+      title: Testing
+- title: Extending
+  directory: extending
   icon: code
   items:
     - id: types

@@ -134,7 +134,7 @@ const UtilNav = () => {
 }
 
 const SiteHeader = ({ siteTitle, location }) => (
-  <Header style={{ padding: 0, height: '66px', position: 'fixed', zIndex: 99, width: '100%' }}>
+  <Header style={{ padding: 0, height: '66px', position: 'fixed', zIndex: 101, width: '100%' }}>
     <Container>
       <Row type="flex" justify="space-between">
         <div className="logo-menu">

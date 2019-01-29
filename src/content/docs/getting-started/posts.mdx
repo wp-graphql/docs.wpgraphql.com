@@ -7,16 +7,27 @@ import Note from '../../../components/Note'
 import GraphiQL from '../../../components/GraphiQL'
 import { Button } from 'antd'
 
-Posts are at the heart of WordPress. On this page, we'll take a look at various ways to interact with
-Posts using WPGraphQL.
+Posts are at the heart of WordPress. On this page, we'll take a look at various ways to interact
+with Posts using WPGraphQL.
 
-## Query Posts
+<Note type="warning">
+If any of the semantics of the GraphQL queries/mutations on this page are confusing, check out the:
+<br/><br/>
+<a href="/docs/getting-started/intro-to-graphql"><Button type="primary">Intro to GraphQL Guide</Button></a>
+</Note>
+
+## Queries
+
+WPGraphQL comes with RootQuery fields built-in to query Post data. You can query for lists of posts,
+or individual posts. Below, we'll look at some common examples for querying for Posts.
+
+### List of Posts
 
 In this example, we query a list of Post nodes. By default, WPGraphQL will return 10 items.
 
 <GraphiQL
     query='
-    {
+    query GET_POSTS {
       posts {
         edges {
           node {
@@ -34,30 +45,176 @@ In this example, we query a list of Post nodes. By default, WPGraphQL will retur
 One of the first things you may ask when you see this is: <strong><em>"What in the world are
 'edges' and 'nodes'?"</em></strong>.
 
-We've written up a guide on what they are and why WPGraphQL makes use of this shape of data throughout.
+We've written up a guide on what they are and why WPGraphQL makes use of this shape of data
+throughout.
 
 <a href="/docs/guides/relay-spec"><Button type="primary">Read the Guide</Button></a>
 </Note>
+
+### Arguments
+
+In many cases, exactly 10 posts won't be what you need for your application. So we can use arguments
+on the `posts` field to declare how many items we want.
+
+Here we're using the `first` argument to declare that we want the first 5 posts.
+
+<Note title="Using Variables with Arguments" type="info">
+We pass the number as a variable so that our query can be dynamic without changing the actual query
+string. <a href="/docs/getting-started/intro-to-graphql/">Learn more about using variables</a>.
+</Note>
+
+<GraphiQL
+    query='
+    query GET_POSTS ($first: Int) {
+      posts( first: $first ) {
+        edges {
+          node {
+            id
+            title
+            date
+          }
+        }
+      }
+    }
+    '
+    variables={
+        {
+          first: 5
+        }
+    }
+/>
+
+You can adjust the number of items as well. Here we'll ask for just 1 Post:
+
+<GraphiQL
+    query='
+    query GET_POSTS ($first: Int) {
+      posts( first: $first ) {
+        edges {
+          node {
+            id
+            title
+            date
+          }
+        }
+      }
+    }
+    '
+    variables={
+        {
+          first: 1
+        }
+    }
+/>
+
+### whereArgs
+
+Post connections can be further filtered by using `whereArgs`.
+
+The args available are largely similar to what's available (and end up mapping to) to the underlying
+[WP_Query](https://codex.wordpress.org/Class_Reference/WP_Query). We'll look at a few quick examples,
+but it's probably best for you to spend some time exploring the Schema Docs to see what options are
+available.
+
+Also, keep in mind that the _entire_ WPGraphQL Schema is filterable should you need to extend the
+Schema and provide custom arguments for your applications needs.
+
+- **Here's an example of using the `where` argument to pass in a `DateQuery` to specify a specific
+date for which to grab posts for**
+
+<GraphiQL
+    query='
+    query GET_POSTS( $first: Int $dateQuery: DateQueryInput ) {
+      posts( first: $first where: { dateQuery: $dateQuery }) {
+        edges {
+          node {
+            id
+            title
+            date
+          }
+        }
+      }
+    }
+    '
+    withDocs={true}
+    variables={
+      {
+        first: 1,
+        dateQuery: {
+          day: 10,
+          month: 1,
+          year: 2019
+        }
+      }
+    }
+/>
+
+- **Here's an example of using the `where` argument to find a post with a specific title:**
+
+<GraphiQL
+    query='
+    query GET_POSTS($first: Int $title: String) {
+      posts(first: $first where: { title: $title }) {
+        edges {
+          node {
+            id
+            title
+            date
+          }
+        }
+      }
+    }
+    '
+    withDocs={false}
+    variables={
+      {
+        first: 1,
+        title: "Build an App Using React and the GraphQL Plugin for WordPress in ~15mins"
+      }
+    }
+/>
+
 
 ### Pagination
 
 When querying a list of nodes (Posts), it's common to need to paginate to fetch more items. The
 Schema exposes some helpful fields we can ask for to know if there are more items to fetch.
 
+Fields that are helpful for knowing if there are more items to paginate:
+
+- **pageInfo.hasNextPage:** Whether there are more items going forward
+- **pageInfo.hasPreviousPage:** Whether there are more items going backward
+- **pageInfo.endCursor:** The cursor for the last item in the list
+- **pageInfo.startCursor:** The cursor for the first item in the list
+
+The arguments used for pagination are:
+
+- **first:** The number of items to fetch. To be used along with `after` for forward pagination.
+- **after:** The cursor to reference where to fetch from. To be used along with `first` for forward
+pagination.
+- **last:** The number of items to fetch. To be used along with `before` for backward pagination.
+- **before:** The cursor to reference where to fetch from. To be used along with `last` for backward
+pagination.
+
+
+
 #### pageInfo
 
-Here, you can see that we ask for the field `pageInfo`, and on that we ask for `hasNextPage` and
+Here is an example of asking for `pageInfo` fields to see if there are more items in the list of
+data.
+
+You can see that we ask for the field `pageInfo`, and on that we ask for `hasNextPage` and
 `endCursor`.
 
-The `hasNextPage` field will be either `true` or `false`, and the `endCursor` will be an opaque string
-that acts as a reference to the last node returned in the query.
+The `hasNextPage` field will be either `true` or `false`, and the `endCursor` will be an opaque
+string that acts as a reference to the last node returned in the query.
 
 The cursor can then be used as an argument in a follow-up query, to ask for posts `after` that point
 in the dataset.
 
 <GraphiQL
     query='
-    {
+    query GET_POSTS {
       posts {
         pageInfo {
           hasNextPage
@@ -84,9 +241,14 @@ In this case, we're telling WPGraphQL we want the first 5 most recent posts.
 
 <GraphiQL
     query='
-    {
-      posts(first: 5) {
+    query GET_POSTS($first: Int $after: String) {
+      posts(first: $first after: $after) {
+        pageInfo {
+          hasNextPage
+          endCursor
+        }
         edges {
+          cursor
           node {
             id
             title
@@ -96,7 +258,16 @@ In this case, we're telling WPGraphQL we want the first 5 most recent posts.
       }
     }
     '
+    variables={
+     {
+       first: 5,
+       after: null
+     }
+    }
 />
+
+In the response, we see that `hasNextPage` responds with `true`, meaning there are more posts, and
+we can use the `endCursor` to ask for the posts `after` the last item in this list.
 
 #### after
 
@@ -106,16 +277,51 @@ When querying for a list of posts, it's common to need to paginate. When we ask 
 posts, there's a good chance we'll want to ask for the _first_ `10` posts _after_ the final post in
 that list.
 
+<GraphiQL
+    query='
+    query GET_POSTS($first: Int $after: String) {
+      posts(first: $first after: $after) {
+        pageInfo {
+          hasNextPage
+          endCursor
+        }
+        edges {
+          cursor
+          node {
+            id
+            title
+            date
+          }
+        }
+      }
+    }
+    '
+    variables={
+     {
+       first: 5,
+       after: "YXJyYXljb25uZWN0aW9uOjUx"
+     }
+    }
+/>
+
 #### last
 
 We can use the `last` argument to declare how many items we want from the "back" of the dataset. In
 this case, we're telling WPGraphQL we want the last 5 (oldest) posts.
 
+At the bottom of the list will be the oldest item in the dataset. The top item in the list will be
+the newest of the 5 displayed (because we're going backward here).
+
 <GraphiQL
     query='
-    {
-      posts(last: 5) {
+    query GET_POSTS($last: Int $before: String){
+      posts(last: $last before: $before) {
+        pageInfo {
+          hasPreviousPage
+          startCursor
+        }
         edges {
+          cursor
           node {
             id
             title
@@ -125,37 +331,37 @@ this case, we're telling WPGraphQL we want the last 5 (oldest) posts.
       }
     }
     '
+    variables={
+      {
+        last: 5,
+        before: null
+      }
+    }
 />
+
+So, we can see that `hasPreviousPage` is set to true, which means we have more items `before` this.
+
+We can take the `startCursor` and use that as the value of our next query as our `before` value.
 
 #### before
 
+Here, we take the `startCursor` from our previous query, and use it as the value for our `before`
+input.
 
-### Using Arguments
+So, what we're saying is that we want `5` more items before the `startCursor` in our previous query.
 
-In many cases, exactly 10 posts won't be what you need for your application. So we can use arguments
-on the `posts` field to declare how many items we want.
-
-### whereArgs
-
-Post connections can be further filtered by using `whereArgs`.
-
-The args available are largely similar to what's available (and end up mapping to) to the underlying
-[WP_Query](https://codex.wordpress.org/Class_Reference/WP_Query). We'll look at a few quick examples,
-but it's probably best for you to spend some time exploring the Schema Docs to see what options are
-available.
-
-Also, keep in mind that the entire WPGraphQL Schema is filterable should you need to extend the
-Schema and provide custom arguments for your applications needs.
+As long as `hasPreviousPage` returns true, that means we have more data that we can paginate through.
 
 <GraphiQL
     query='
-    {
-      posts(where: { dateQuery: {
-        day: 10
-        month: 1
-        year: 2019
-      }}) {
+    query GET_POSTS($last: Int $before: String) {
+      posts(last: $last before: $before) {
+        pageInfo {
+          hasPreviousPage
+          startCursor
+        }
         edges {
+          cursor
           node {
             id
             title
@@ -165,12 +371,83 @@ Schema and provide custom arguments for your applications needs.
       }
     }
     '
-    withDocs={true}
+    variables={
+     {
+       last: 5,
+       before: "YXJyYXljb25uZWN0aW9uOjQyNw=="
+     }
+    }
 />
 
 ### Post
 
+If we know the ID of a Post, we can query for the post individually like so:
+
+<GraphiQL
+  query="
+  query GET_POST( $id: ID! ) {
+    post( id: $id ) {
+      id
+      postId
+      title
+      date
+      uri
+    }
+  }
+  "
+  variables={
+    {
+        id: "cG9zdDo1MQ=="
+    }
+  }
+/>
+
 ### PostBy
+
+Sometimes you need to query an individual Post, but you don't have the ID. There are a few other
+ways to get an individual Post, but using the `postBy` query.
+
+**Here's an example of getting a post by it's URI.**
+
+<GraphiQL
+  query="
+  query GET_POST( $uri: String ) {
+    postBy( uri: $uri ) {
+      id
+      postId
+      title
+      date
+      uri
+    }
+  }
+  "
+  variables={
+    {
+        uri: "wpgraphql-featured-on-freecodecamp"
+    }
+  }
+/>
+
+**Here's an example of getting a post by it's database ID.**
+
+<GraphiQL
+  query="
+  query GET_POST( $postId: Int ) {
+    postBy( postId: $postId ) {
+      id
+      postId
+      title
+      date
+      uri
+    }
+  }
+  "
+  variables={
+    {
+        postId: 51
+    }
+  }
+/>
 
 ## Mutations
 
