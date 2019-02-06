@@ -25,7 +25,7 @@ const Logo = () => (
 const menuItems = [
   {
     name: 'Docs',
-    path: '/docs/quick-start/install-and-activate',
+    path: '/docs/getting-started/install-and-activate',
     key: '/docs'
   },
   {

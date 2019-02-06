@@ -11,9 +11,9 @@ Posts are at the heart of WordPress. On this page, we'll take a look at various 
 with Posts using WPGraphQL.
 
 <Note type="warning">
-If any of the semantics of the GraphQL queries/mutations on this page are confusing, check out the:
-<br/><br/>
-<a href="/docs/getting-started/intro-to-graphql"><Button type="primary">Intro to GraphQL Guide</Button></a>
+If any of the terminology or semantics of the GraphQL queries/mutations on this page are confusing,
+check out the <a href="/docs/getting-started/intro-to-graphql">Intro to GraphQL Guide</a> to get
+more familiar with the basics.
 </Note>
 
 ## Queries
@@ -451,10 +451,103 @@ ways to get an individual Post, but using the `postBy` query.
 
 ## Mutations
 
-In this section, we'll look at various ways to mutate Posts
+In this section, we'll look at various ways to mutate Posts.
+
+<Note title="Mutations and Auth" type="info">
+WPGraphQL respects user capabilities when mutating data, so _most_ mutations in WPGraphQL require
+requests to be Authenticated, and the user making the request must have proper capabilities to mutate
+the data. Check out the <a href="/docs/guides/authentication-and-authorization">Authentication
+and Authorization Guide</a> to learn more.
+
+The demos below are public requests and will not actually mutate data, but you can get an idea of how
+to compose mutations by looking at the examples.
+</Note>
 
 ### Create Post
 
+This is an example of a mutation to create a Post.
+
+There are two required input fields to create a post, `clientMutationId` and `title`.
+
+Here you can see that we define our input variable to be of the type `CreatePostInput!`.
+
+By defining our input in this way, it allows for flexibility for the input variables. Whatever we
+input will validate against the shape of the `CreatePostInput!` Type. This means any of the `nonNull`
+input fields will need to be required, but any of the other fields are optional, but have to be of
+the specified Type defined in the Schema.
+
+<GraphiQL
+  query="
+  mutation CREATE_POST( $input:CreatePostInput! ){
+    createPost( input: $input ) {
+      post {
+        id
+        title
+        date
+        slug
+      }
+    }
+  }
+  "
+  variables={
+      {
+        input: {
+          clientMutationId: "CreatePost",
+          title: "New Post Title"
+        }
+      }
+  }
+/>
+
 ### Update Post
 
+Below is an example mutation to update a post. For this, we _must_ know the ID of the Post.
+
+<GraphiQL
+  query="
+  mutation UPDATE_POST( $input:UpdatePostInput! ){
+    updatePost( input: $input ) {
+      post {
+        id
+        title
+        date
+        slug
+      }
+    }
+  }
+  "
+  variables={
+      {
+        input: {
+          clientMutationId: "UpdatePost",
+          id: "cG9zdDo1MQ==",
+          title: "New Title for the Post"
+        }
+      }
+  }
+/>
+
 ### Delete Post
+
+Below is an example mutation to delete a post. For this, we _must_ know the ID of the Post.
+
+<GraphiQL
+  query="
+  mutation DELETE_POST($input: DeletePostInput!) {
+    deletePost(input: $input) {
+      deletedId
+      post {
+        id
+      }
+    }
+  }
+  "
+  variables={
+    {
+      "input": {
+        "clientMutationId": "DELETE_POST",
+        "id": "cG9zdDo1MQ=="
+      }
+    }
+  }
+/>
