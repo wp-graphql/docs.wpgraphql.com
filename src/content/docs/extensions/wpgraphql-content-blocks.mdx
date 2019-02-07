@@ -26,7 +26,7 @@ For example, if a post’s content field in GraphQL contained:
 
 Then the `blocks` field would contain:
 
-```
+```php
 [
 	{
 		"type": "P",
@@ -46,7 +46,7 @@ your component library. No more `dangerouslySetInnerHTML`-ing your entire `post_
 
 An exhaustive GraphQL of a post’s blocks field would look like this:
 
-```graphql
+```json
 blocks {
 	type
 	tagName

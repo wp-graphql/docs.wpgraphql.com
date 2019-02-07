@@ -43,23 +43,66 @@ add_filter( 'register_post_type_args', function( $args, $post_type ) {
 }, 10, 2 );
 ```
 
-## Interacting with Custom Post Types
+## Querying Custom Post Types
 
-Once your Post Type is registered to Show in GraphQL, you will be able to interact with it in the
-same way you can interact with Posts or Pages, of course just using the name of the Type in place.
+With just a few lines of code, our custom Post Type is added to the Schema in various places.
 
-For example, a query for Documents based on the example code above might look like:
+Below are some examples, but it’s probably worth exploring the Schema a bit to see where all your
+new Type shows up in the Schema
 
-```graphql
-query GET_DOCUMENTS {
+### Single Document Query
+This example shows how to query a single document by it’s URI.
+
+<Note title="Fragments">
+This example also showcases some
+<a href="/docs/getting-started/intro-to-graphql/">features of GraphQL
+queries</a> such as fragments, arguments, operation type and operation name.
+</Note>
+<br/>
+
+```json
+query GetDocument {
+  documentBy(uri: "docs/getting-started/custom-post-types-taxonomies/") {
+    title(format: RAW)
+    link
+    slug
+  }
+}
+```
+
+### Get Collection of Documents and their Children
+This example shows how to query a collection of documents, and their child documents
+(available for hierarchical Post Types).
+
+<Note title="Fragments">
+This example also showcases some
+<a href="/docs/getting-started/intro-to-graphql/">features of GraphQL
+queries</a> such as fragments, arguments, operation type and operation name.
+</Note>
+<br/>
+
+```json
+query GetDocuments {
   documents {
     edges {
       node {
-        id
-        title
-        date
+        ...DocumentFields
+        childDocuments {
+          edges {
+            node {
+              ...DocumentFields
+            }
+          }
+        }
       }
     }
   }
+}
+
+fragment DocumentFields on Document {
+  title(format:RAW)
+  slug
+  link
+  content
 }
 ```

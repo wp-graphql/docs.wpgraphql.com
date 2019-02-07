@@ -18,14 +18,18 @@
       title: Categories & Tags
     - id: custom-taxonomies
       title: Custom Taxonomies
+    - id: custom-fields-and-meta
+      title: Custom Fields & Meta
     - id: users
       title: Users
+    - id: comments
+      title: Comments
+    - id: settings
+      title: Settings
     - id: plugins
       title: Plugins
     - id: themes
       title: Themes
-    - id: settings
-      title: Settings
 - title: Guides
   directory: guides
   icon: read

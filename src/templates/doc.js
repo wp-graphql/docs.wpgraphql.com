@@ -34,7 +34,7 @@ const getOpenKey = (docsNavList, path) => {
 const DocsNav = ({location}) => (
   <Menu
     mode="inline"
-    defaultSelectedKeys={['1']}
+    defaultSelectedKeys={location.pathname}
     defaultOpenKeys={getOpenKey(docsNavList, location.pathname)}
     selectedKeys={location.pathname ? location.pathname : []}
     style={{ height: '100%' }}
@@ -108,13 +108,13 @@ const DocTemplate = ({data, location}) => {
                       offsetTop={80}>
                       <h4 style={{paddingLeft: '13px', marginTop: '10px'}}>On this page</h4>
                       {data.mdx.tableOfContents.items && data.mdx.tableOfContents.items.map( item => {
-                        return (<AnchorLink href={item.url} title={item.title} >{
+                        return (<AnchorLink key={item.url} href={item.url} title={item.title} >{
                           item.items && item.items.map( childItem => {
                             return (
-                              <AnchorLink href={childItem.url} title={childItem.title} >
+                              <AnchorLink key={childItem.url} href={childItem.url} title={childItem.title} >
                                 {
                                   childItem.items && childItem.items.map( grandChildItem => {
-                                    return <AnchorLink href={grandChildItem.url} title={grandChildItem.title} />
+                                    return <AnchorLink key={grandChildItem.url} href={grandChildItem.url} title={grandChildItem.title} />
                                   })
                                 }
                               </AnchorLink>

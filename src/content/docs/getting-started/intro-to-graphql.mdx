@@ -51,7 +51,7 @@ To get started understanding GraphQL, it's best to look at an example of a Graph
 This is essentially the "hello world" of GraphQL queries for a site running WPGraphQL. This query
 asks for `generalSettings`, and on `generalSettings`, it's asking for the field `url`.
 
-```graphql
+```json
 {
  generalSettings {
    url
@@ -202,7 +202,7 @@ the mutation and write data back to the WordPress database.
 
 Here's an example of a mutation that will first check to see if you're allowed to create posts:
 
-```graphql
+```json
 mutation {
   createPost(input: {clientMutationId: "CreatePost", title: "New Post"}) {
     post {

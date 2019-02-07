@@ -149,7 +149,7 @@ class GraphiQLComponent extends Component {
         <GraphiQL
           fetcher={ this.fetcher }
           query={formattedQuery}
-          variables={variables ? JSON.stringify(variables) : null}
+          variables={variables ? JSON.stringify(variables, null, 2) : null}
           extensions={{
             queryLog: true,
             tracing: false
