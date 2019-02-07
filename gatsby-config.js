@@ -8,46 +8,6 @@ require('dotenv').config({
   path: `.env.${activeEnv}`,
 })
 
-const siteContent = `
-{
-  allMdx(filter: {fileAbsolutePath: {regex: "/content/docs/([\\\\w\\\\-/]+)/gm"}}) {
-    edges {
-      node {
-        id
-        fileAbsolutePath 
-        tableOfContents
-        frontmatter {
-          title
-          description
-        }
-        content: html
-        fields { 
-          slug
-        }
-      }
-    }
-  }
-}`
-
-const queries = [
-  {
-    query: siteContent,
-    transformer: ({ data }) => data.allMdx.edges.map(({ node }) => {
-
-      node.path = node.fields.slug ? node.fields.slug : null;
-      node.title = node.frontmatter.title ? node.frontmatter.title : node.fileAbsolutePath;
-
-      if ( node.path && node.title ) {
-        return node;
-      } else {
-        return null;
-      }
-
-    })
-  }
-];
-
-
 module.exports = {
   siteMetadata: {
     title: `WPGraphQL`,
@@ -120,16 +80,6 @@ module.exports = {
           // @box-shadow-base: 0 2px 8px rgba(0, 0, 0, .15);
           'box-shadow-base': '0 2px 8px rgba(0, 0, 0, .15)',
         },
-      },
-    },
-    {
-      resolve: `gatsby-plugin-algolia`,
-      options: {
-        appId: process.env.ALGOLIA_APP_ID,
-        apiKey: process.env.ALGOLIA_API_KEY,
-        indexName: process.env.ALGOLIA_INDEX_NAME,
-        queries,
-        chunkSize: 1000,
       },
     },
     {
