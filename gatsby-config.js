@@ -129,7 +129,7 @@ module.exports = {
         apiKey: process.env.ALGOLIA_API_KEY,
         indexName: process.env.ALGOLIA_INDEX_NAME,
         queries,
-        chunkSize: 10000,
+        chunkSize: 5000,
       },
     },
     {
