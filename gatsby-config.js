@@ -8,40 +8,13 @@ require('dotenv').config({
   path: `.env.${activeEnv}`,
 })
 
-const sitePages = `
-{
-  allSitePage {
-    edges {
-      node {
-        id
-        component
-        path
-        componentChunkName
-        title: jsonName
-        internal {
-          type
-          contentDigest
-          owner
-        }
-      }
-    }
-  }
-}
-`;
-
 const siteContent = `
 {
   allMdx(filter: {fileAbsolutePath: {regex: "/content/docs/([\\\\w\\\\-/]+)/gm"}}) {
     edges {
       node {
         id
-        timeToRead
-        fileAbsolutePath
-        wordCount {
-          words
-          paragraphs
-          sentences
-        }
+        fileAbsolutePath 
         tableOfContents
         frontmatter {
           title
@@ -57,12 +30,6 @@ const siteContent = `
 }`
 
 const queries = [
-  {
-    query: sitePages,
-    transformer: ({ data }) => data.allSitePage.edges.map(({ node }) => {
-      return node;
-    })
-  },
   {
     query: siteContent,
     transformer: ({ data }) => data.allMdx.edges.map(({ node }) => {
