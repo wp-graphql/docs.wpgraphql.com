@@ -6,7 +6,7 @@ const Logo = () => (
   <Link to="/" style={{
     marginRight: '20px'
   }}>
-    <img src={logo} alt="" height="40" />
+    <img src={logo} alt="" height="150" />
   </Link>
 )
 

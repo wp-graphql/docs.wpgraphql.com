@@ -57,7 +57,7 @@ module.exports = {
           // Full list of variables can be found here:
           // https://github.com/ant-design/ant-design/blob/master/components/style/themes/default.less
           // @primary-color: #1890ff;
-          'layout-header-background': '#102032',
+          'layout-header-background': '#0E2339',
           // primary color for all components
           'primary-color': '#1890ff',
           // @link-color: #1890ff;
@@ -136,8 +136,8 @@ module.exports = {
         name: `gatsby-starter-default`,
         short_name: `starter`,
         start_url: `/`,
-        background_color: `#102032`,
-        theme_color: `#102032`,
+        background_color: `#0E2339`,
+        theme_color: `#0E2339`,
         display: `minimal-ui`,
         icon: `src/images/icon.png`, // This path is relative to the root of the site.
       },
