@@ -17,7 +17,7 @@ h3,
 h4,
 h5,
 h6 {
-    margin-top: 3rem;
+    margin-top: 2rem;
 }
 
 p {
@@ -27,6 +27,10 @@ p {
 
 .ant-alert-description {
     margin-top: 15px;
+}
+
+.ant-alert {
+    margin-bottom: 2rem;
 }
 
 .docsnav-anchor {
@@ -42,8 +46,4 @@ p {
 
 img {
     max-width: 100%;
-}
-
-.ant-alert {
-    margin-bottom: 20px;
 }
