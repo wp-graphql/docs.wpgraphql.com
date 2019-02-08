@@ -26,7 +26,7 @@ const DocsNav = ({location}) => (
     mode="inline"
     defaultSelectedKeys={location && location.pathname ? location.pathname : null}
     defaultOpenKeys={ location && location.pathname ? getOpenKey(docsNavList, location.pathname ) : null }
-    selectedKeys={location.pathname ? location.pathname : []}
+    selectedKeys={location && location.pathname ? location.pathname : []}
     style={{ height: '100%' }}
   >
     {docsNavList.map( item => {
