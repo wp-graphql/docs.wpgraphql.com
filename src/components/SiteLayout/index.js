@@ -32,7 +32,9 @@ const SiteLayout = ({children, location = null}) => (
         <DocsNav location={location} />
       </Anchor>
     </Sider>
-    <Layout>
+    <Layout style={{
+      minHeight: 'calc( 100vh )'
+    }}>
       <Header>
         <SiteHeader/>
       </Header>
