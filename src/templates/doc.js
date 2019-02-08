@@ -1,21 +1,13 @@
 import React from 'react'
 import { graphql } from 'gatsby'
-import { Layout, Menu, Anchor, Row, Col, Divider, Button } from 'antd'
+import { Anchor, Row, Col, Divider, Button } from 'antd'
 import SiteLayout from '../components/SiteLayout'
 import MDXRenderer from "gatsby-mdx/mdx-renderer";
 import { MDXProvider } from '@mdx-js/tag';
-import Container from '../components/Container'
 import SyntaxHighlighter from 'react-syntax-highlighter'
 import { tomorrowNightEighties } from 'react-syntax-highlighter/dist/styles/hljs'
 import AutoLinkHeader from '../components/AutolinkHeader'
-import DocsNav from '../components/DocsNav'
 const { Link: AnchorLink } = Anchor;
-
-const { SubMenu } = Menu;
-const {
-  Content, Sider,
-} = Layout;
-
 
 const CodeSyntaxHighlighter = (props) => {
   const { children, className } = props;
