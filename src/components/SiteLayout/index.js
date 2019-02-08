@@ -3,6 +3,7 @@ import { Layout, Anchor } from 'antd'
 import Logo from '../Logo'
 import DocsNav from '../DocsNav'
 import SiteHeader from '../SiteHeader'
+import '../style.css'
 
 const {
   Content, Sider, Header

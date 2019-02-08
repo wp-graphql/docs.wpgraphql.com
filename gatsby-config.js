@@ -30,7 +30,7 @@ module.exports = {
         },
         gatsbyRemarkPlugins: [
           {
-            resolve: "gatsby-remark-images",
+            resolve: `gatsby-remark-images`,
             options: {
               maxWidth: 1035,
               sizeByPixelDensity: true
@@ -39,6 +39,12 @@ module.exports = {
           {
             resolve: "gatsby-remark-copy-linked-files",
           },
+          {
+            resolve: `gatsby-transformer-remark`,
+            options: {
+              plugins: [`gatsby-remark-autolink-headers`],
+            },
+          }
         ]
       },
     },
@@ -64,7 +70,7 @@ module.exports = {
           'error-color': '#f5222d',
           // @font-size-base: 14px;
           // major text font size
-          'font-size-base': '15px',
+          'font-size-base': '16px',
           // @heading-color: rgba(0, 0, 0, .85);
           'heading-color': 'rgba(0, 0, 0, .85)',
           // @text-color: rgba(0, 0, 0, .65);
@@ -141,9 +147,6 @@ module.exports = {
       options: {
         trackingId: 'UA-111783024-1'
       }
-    }
-    // this (optional) plugin enables Progressive Web App + Offline functionality
-    // To learn more, visit: https://gatsby.app/offline
-    // 'gatsby-plugin-offline',
+    },
   ],
 }

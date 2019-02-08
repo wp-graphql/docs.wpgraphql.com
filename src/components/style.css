@@ -43,3 +43,7 @@ p {
 img {
     max-width: 100%;
 }
+
+.ant-alert {
+    margin-bottom: 20px;
+}
