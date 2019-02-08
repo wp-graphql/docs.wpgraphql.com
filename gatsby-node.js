@@ -50,14 +50,14 @@ exports.createPages = ({graphql, actions}) => {
 
     docs.forEach((doc, index) => {
 
-      const regex = /content\/docs\/([\w\-\/]+)/gm;
+      const regex = /content\/([\w\-\/]+)/gm;
       const str = doc.node.fileAbsolutePath;
       let path = regex.exec(str);
 
       if ( path && path.length && path[1] ) {
 
         createPage({
-          path: `/docs/${path[1]}`,
+          path: path[1],
           component: docTemplate,
           context: {
             id: doc.node.id,

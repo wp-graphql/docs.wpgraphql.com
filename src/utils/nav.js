@@ -1,6 +1,6 @@
-import navDocs from '../content/docs/nav.yml'
+import navDocs from '../content/nav.yml'
 
-const docsNavList = navDocs.map(( item ) => ({...item, directory: `/docs/${item.directory}`}));
+const docsNavList = navDocs.map(( item ) => ({...item, directory: item.directory}));
 
 export {
   docsNavList

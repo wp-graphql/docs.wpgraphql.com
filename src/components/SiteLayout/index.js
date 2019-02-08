@@ -30,7 +30,6 @@ const SiteLayout = ({children, location = null}) => (
         offsetTop={0}
       >
         <DocsNav location={location} />
-
       </Anchor>
     </Sider>
     <Layout>

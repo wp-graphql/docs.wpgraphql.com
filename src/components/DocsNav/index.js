@@ -24,8 +24,8 @@ const DocsNav = ({location}) => (
   <Menu
     theme="dark"
     mode="inline"
-    defaultSelectedKeys={location.pathname}
-    defaultOpenKeys={getOpenKey(docsNavList, location.pathname)}
+    defaultSelectedKeys={location && location.pathname ? location.pathname : null}
+    defaultOpenKeys={getOpenKey(docsNavList, location && location.pathname ? location.pathname : null)}
     selectedKeys={location.pathname ? location.pathname : []}
     style={{ height: '100%' }}
   >
