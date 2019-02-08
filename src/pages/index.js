@@ -60,7 +60,7 @@ const IndexPage = ({location}) => (
                   grid={{gutter:16, column:3}}
                   renderItem={ subItem => (
                     <List.Item key={subItem.id}>
-                      <Link to={ item.directory + '/' + subItem.id }><Icon type="link" /> {subItem.title}</Link>
+                      <Link to={ '/' + item.directory + '/' + subItem.id }><Icon type="link" /> {subItem.title}</Link>
                     </List.Item>
                   )}
                 />
