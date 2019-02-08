@@ -32,7 +32,7 @@
       title: Themes
 - title: Guides
   directory: guides
-  icon: read
+  icon: book
   items:
     - id: about-wpgraphql
       title: About WPGraphQL
