@@ -1,51 +1,49 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-import { StaticQuery, graphql } from 'gatsby'
-import { Layout } from 'antd';
-import '../style.css'
+import { Layout, Anchor } from 'antd'
+import Logo from '../Logo'
+import DocsNav from '../DocsNav'
 import SiteHeader from '../SiteHeader'
-import Container from '../Container'
 
-const SiteLayout = ({ children, location = null }) => (
-  <StaticQuery
-    query={graphql`
-      query SiteTitleQuery {
-        site {
-          siteMetadata {
-            title
-          }
-        }
-      }
-    `}
-    render={data => (
-      <Layout style={{
-        background:'#fff'
-      }}>
-        <SiteHeader location={location} siteTitle={data.site.siteMetadata.title} />
-        <div style={{ marginTop: '66px' }}>
+const {
+  Content, Sider, Header
+} = Layout;
+
+const SiteLayout = ({children, location = null}) => (
+  <Layout>
+    <Sider
+      breakpoint="lg"
+      collapsedWidth="0"
+      onBreakpoint={(broken) => { console.log(broken); }}
+      onCollapse={(collapsed, type) => { console.log(collapsed, type); }}
+      width={300}
+    >
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          padding: '10px'
+        }}
+      >
+        <Logo />
+      </div>
+      <Anchor
+        offsetTop={0}
+      >
+        <DocsNav location={location} />
+
+      </Anchor>
+    </Sider>
+    <Layout>
+      <Header>
+        <SiteHeader/>
+      </Header>
+      <Content style={{ margin: '24px 16px 0' }}>
+        <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
           {children}
-          <footer style={{
-            width: '100%',
-            padding: '40px 0',
-            background: '#eaeaea',
-            zIndex: 9,
-            position: 'relative'
-          }}>
-            <Container>
-              © {new Date().getFullYear()}, Built with
-              {` `}
-              <a href="https://www.gatsbyjs.org">Gatsby</a>
-            </Container>
-          </footer>
         </div>
-
-      </Layout>
-    )}
-  />
-);
-
-SiteLayout.propTypes = {
-  children: PropTypes.node.isRequired,
-};
+      </Content>
+    </Layout>
+  </Layout>
+)
 
 export default SiteLayout
