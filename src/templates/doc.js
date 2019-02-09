@@ -19,7 +19,7 @@ const DocTemplate = ({data, location}) => {
   return(
     <SiteLayout location={location}>
       <Row type='flex' justify='space-between'>
-        <Col span={16}>
+        <Col xs={24} lg={16} xl={18}>
           <div className="content" style={{ padding: '0px 48px 0 35px' }}>
             <h1>{data.mdx.frontmatter.title}</h1>
             <Divider />
@@ -44,7 +44,7 @@ const DocTemplate = ({data, location}) => {
             </a>
           </div>
         </Col>
-        <Col span={6}>
+        <Col xs={0} lg={8} xl={6}>
           {
             data.mdx.tableOfContents.items && data.mdx.tableOfContents.items.length ?
               <Anchor

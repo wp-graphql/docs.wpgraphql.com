@@ -2,11 +2,9 @@ import React from 'react'
 import { Link } from 'gatsby'
 import logo from '../../images/icon.png'
 
-const Logo = () => (
-  <Link to="/" style={{
-    marginRight: '20px'
-  }}>
-    <img src={logo} alt="" height="150" />
+const Logo = ({size = 150, margin = '1rem' }) => (
+  <Link to="/">
+    <img style={{margin: margin }} src={logo} alt="" height={size} />
   </Link>
 )
 

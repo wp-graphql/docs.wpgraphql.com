@@ -30,32 +30,6 @@
       title: Plugins
     - id: themes
       title: Themes
-- title: Guides
-  directory: guides
-  icon: book
-  items:
-    - id: about-wpgraphql
-      title: About WPGraphQL
-    - id: the-graphql-query-language
-      title: The GraphQL Query Language
-    - id: relay-spec
-      title: Relay Spec (Edges & Nodes)
-    - id: anatomy-of-a-graphql-request
-      title: Anatomy of a GraphQL Request
-    - id: upgrading
-      title: Upgrading
-    - id: authentication-and-authorization
-      title: Authentication and Authorization
-    - id: debugging
-      title: Debugging
-    - id: deferred-resolvers
-      title: Deferred Resolvers
-    - id: query-batching
-      title: Query Batching
-    - id: contributing
-      title: Contributing
-    - id: testing
-      title: Testing
 - title: Extending
   directory: extending
   icon: code
@@ -96,3 +70,29 @@
       title: WPGraphiQL
     - id: wpgraphql-content-blocks
       title: WPGraphQL Content Blocks
+- title: Guides
+  directory: guides
+  icon: book
+  items:
+    - id: about-wpgraphql
+      title: About WPGraphQL
+    - id: the-graphql-query-language
+      title: The GraphQL Query Language
+    - id: relay-spec
+      title: Relay Spec (Edges & Nodes)
+    - id: anatomy-of-a-graphql-request
+      title: Anatomy of a GraphQL Request
+    - id: upgrading
+      title: Upgrading
+    - id: authentication-and-authorization
+      title: Authentication and Authorization
+    - id: debugging
+      title: Debugging
+    - id: deferred-resolvers
+      title: Deferred Resolvers
+    - id: query-batching
+      title: Query Batching
+    - id: contributing
+      title: Contributing
+    - id: testing
+      title: Testing

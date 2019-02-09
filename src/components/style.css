@@ -33,6 +33,10 @@ p {
     margin-bottom: 2rem;
 }
 
+.ant-layout-sider-zero-width-trigger {
+    top: 175px;
+}
+
 .docsnav-anchor {
     z-index: 9;
     margin-bottom: 200px;

@@ -57,7 +57,15 @@ const IndexPage = ({location}) => (
               }}>
                 <List
                   dataSource={item.items}
-                  grid={{gutter:16, column:3}}
+                  grid={{
+                    gutter:16,
+                    xs: 1,
+                    sm: 2,
+                    md: 2,
+                    lg: 2,
+                    xl: 3,
+                    xxl: 3
+                  }}
                   renderItem={ subItem => (
                     <List.Item key={subItem.id}>
                       <Link to={ '/' + item.directory + '/' + subItem.id }><Icon type="link" /> {subItem.title}</Link>

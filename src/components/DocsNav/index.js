@@ -20,25 +20,30 @@ const getOpenKey = (docsNavList, path) => {
 
 }
 
-const DocsNav = ({location}) => (
-  <Menu
-    theme="dark"
-    mode="inline"
-    defaultSelectedKeys={location && location.pathname ? location.pathname : null}
-    defaultOpenKeys={ location && location.pathname ? getOpenKey(docsNavList, location.pathname ) : null }
-    selectedKeys={location && location.pathname ? location.pathname : []}
-    style={{ height: '100%' }}
-  >
-    {docsNavList.map( item => {
-      return(
-        <SubMenu key={item.directory} title={<span><Icon type={item.icon} />{item.title}</span>}>
-          {item.items.map( subItem => {
-            return <Menu.Item key={ item.directory + '/' + subItem.id } onClick={() => { navigate( item.directory + '/' + subItem.id ) }}>{subItem.title}</Menu.Item>;
-          })}
-        </SubMenu>
-      );
-    })}
-  </Menu>
-);
+const DocsNav = ({location}) => {
+
+  const pathname = location && location.pathname ? location.pathname : null;
+
+  return (
+    <Menu
+      theme="dark"
+      mode="inline"
+      defaultSelectedKeys={ pathname }
+      defaultOpenKeys={ pathname && pathname !== '/' ? getOpenKey(docsNavList, pathname ) : 'getting-started' }
+      selectedKeys={ pathname ? pathname : []}
+      style={{ height: '100%' }}
+    >
+      {docsNavList.map( item => {
+        return(
+          <SubMenu key={item.directory} title={<span><Icon type={item.icon} />{item.title}</span>}>
+            {item.items.map( subItem => {
+              return <Menu.Item key={ item.directory + '/' + subItem.id } onClick={() => { navigate( item.directory + '/' + subItem.id ) }}>{subItem.title}</Menu.Item>;
+            })}
+          </SubMenu>
+        );
+      })}
+    </Menu>
+  );
+}
 
 export default DocsNav;

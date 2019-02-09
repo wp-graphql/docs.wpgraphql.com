@@ -31,7 +31,13 @@ class Complete extends Component {
   render() {
     const { results } = this.state;
     return (
-      <div className="certain-category-search-wrapper" style={{ width: '400px', padding: '1px 20px' }}>
+      <div
+        className="certain-category-search-wrapper"
+        style={{
+          width: '100%',
+          padding: '1px 20px'
+        }}
+      >
         <AutoComplete
           className="certain-category-search"
           dropdownClassName="certain-category-search-dropdown"
@@ -45,7 +51,14 @@ class Complete extends Component {
           onChange={ value => { console.log( value ) }}
           onSelect={ value => { navigate( value )}}
         >
-          <Input suffix={<Icon type="search" className="certain-category-icon" />} />
+          <Input
+            suffix={
+              <Icon
+                type="search"
+                className="certain-category-icon"
+              />
+            }
+          />
         </AutoComplete>
       </div>
     );

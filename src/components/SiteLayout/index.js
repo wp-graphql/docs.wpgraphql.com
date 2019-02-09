@@ -1,32 +1,83 @@
 import React from 'react'
-import { Layout, Anchor } from 'antd'
+import { Layout, Row, Anchor, Button, Icon } from 'antd'
 import Logo from '../Logo'
 import DocsNav from '../DocsNav'
 import SiteHeader from '../SiteHeader'
 import '../style.css'
+import { StaticQuery, graphql } from 'gatsby'
+
+const ButtonGroup = Button.Group
 
 const {
   Content, Sider, Header
 } = Layout;
 
+export const UtilNav = () => {
+  return (
+    <StaticQuery query={graphql`
+      query GithubInfo {
+        github {
+          repository(owner: "wp-graphql", name: "wp-graphql") {
+            id
+            name
+            resourcePath
+            releases(first: 1, orderBy: {field: CREATED_AT, direction: DESC}) {
+              nodes {
+                id
+                name
+                url
+              }
+            }
+          }
+        }
+      }
+    `}
+     render={data => {
+       const { github: { repository: { resourcePath, releases: { nodes } } } } = data
+       let version = null
+       if (nodes && nodes.length) {
+         version = nodes[0].name
+       }
+       return (
+         <div>
+           <ButtonGroup>
+             <Button onClick={() => window.open(nodes[0].url)} type="default">
+               {version} <Icon type="branches"/>
+             </Button>
+             <Button onClick={() => window.open(`https://github.com/${resourcePath}`)}
+                     type="default">
+               <Icon type="github"/> Github
+             </Button>
+           </ButtonGroup>
+         </div>
+       )
+
+     }}/>
+  )
+}
+
 const SiteLayout = ({children, location = null}) => (
   <Layout>
     <Sider
-      breakpoint="lg"
+      breakpoint="md"
       collapsedWidth="0"
-      onBreakpoint={(broken) => { console.log(broken); }}
-      onCollapse={(collapsed, type) => { console.log(collapsed, type); }}
       width={300}
     >
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-          padding: '10px'
-        }}
+      <Row
+        type="flex"
+        justify="center"
+        align="middle"
       >
-        <Logo />
-      </div>
+        <Logo size={100}/>
+      </Row>
+      <Row
+        type="flex"
+        justify="center"
+        align="middle"
+        style={{ marginBottom: '2rem' }}
+      >
+        <UtilNav />
+      </Row>
       <Anchor
         offsetTop={0}
       >
@@ -34,12 +85,15 @@ const SiteLayout = ({children, location = null}) => (
       </Anchor>
     </Sider>
     <Layout style={{
-      minHeight: 'calc( 100vh )'
+      minHeight: 'calc( 100vh )',
     }}>
-      <Header>
+      <Header style={{
+        minHeight: '66px',
+        height: 'auto'
+      }}>
         <SiteHeader/>
       </Header>
-      <Content style={{ margin: '24px 16px 0' }}>
+      <Content style={{ margin: '0' }}>
         <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
           {children}
         </div>
