@@ -87,12 +87,15 @@ const SiteLayout = ({children, location = null}) => (
     <Layout style={{
       minHeight: 'calc( 100vh )',
     }}>
-      <Header style={{
-        minHeight: '66px',
-        height: 'auto'
-      }}>
-        <SiteHeader/>
-      </Header>
+      {/*Waiting for Algolia to get sorted out...*/}
+      {/*<Header style={{*/}
+        {/*minHeight: '66px',*/}
+        {/*height: 'auto',*/}
+        {/*background: '#fff',*/}
+        {/*borderBottom: '1px solid #eaeaea'*/}
+      {/*}}>*/}
+        {/*<SiteHeader/>*/}
+      {/*</Header>*/}
       <Content style={{ margin: '0' }}>
         <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
           {children}
