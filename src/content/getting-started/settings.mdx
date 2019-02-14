@@ -3,15 +3,86 @@ title: Settings
 description: Learn how to interact with WordPress Options (settings) using WPGraphQL
 ---
 
-WordPress has a `register_settings()` API that allows developers to register settings for their
-site.
+WordPress has a `register_settings()` API that allows developers to register settings for their site. Check [here](https://developer.wordpress.org/reference/functions/register_setting/) for more information on how these settings are registered by group and name.
 
-WPGraphQL respects this API and exposes registered settings in the WPGraphQL Schema for querying
-and mutating.
+WPGraphQL respects this API and exposes registered settings in the WPGraphQL Schema for querying and mutating.
 
 ## Queries
 
-`@todo: Provide examples`
+### All Settings
+
+Site settings can be queried in two different ways. As mentioned before, you register your own setting group, say `catGifSettings`, and you would see your setting group and fields appear in the GraphQL schema. You can query this data in two different ways. First, by accessing all of the site setting groups at once using the `allSettings` root query field which will return all of the settings fields with the setting group name prepended.
+
+import GraphiQL from '../../components/GraphiQL'
+
+<GraphiQL
+  query="query {
+  allSettings {
+    generalSettingsDateFormat
+    generalSettingsDescription
+    generalSettingsEmail
+    generalSettingsLanguage
+    generalSettingsStartOfWeek
+    generalSettingsTimeFormat
+    generalSettingsTimezone
+    generalSettingsTitle
+    generalSettingsUrl
+    readingSettingsPostsPerPage
+    discussionSettingsDefaultCommentStatus
+    discussionSettingsDefaultPingStatus
+    writingSettingsDefaultCategory
+    writingSettingsDefaultPostFormat
+    writingSettingsUseSmilies
+  }
+}"
+/>
+
+### Site Settings by Settings Group
+
+Site settings can also be queried by setting group name. Field names will be the camel case version of the setting, no longer prepended by the group name since you are using it to query with.
+
+#### General Settings
+
+<GraphiQL
+  query="query{generalSettings {
+  dateFormat
+  description
+  email
+  language
+  startOfWeek
+  timeFormat
+  timezone
+  title
+  url
+}}"
+/>
+
+#### Reading Settings
+
+<GraphiQL
+  query="query{readingSettings {
+    postsPerPage
+}}"
+/>
+
+#### Discussion Settings
+
+<GraphiQL
+  query="query{discussionSettings {
+  defaultCommentStatus
+  defaultPingStatus
+}}"
+/>
+
+#### Writing Settings
+
+<GraphiQL
+  query="query{writingSettings {
+  defaultCategory
+  defaultPostFormat
+  useSmilies
+}}"
+/>
 
 ## Mutations
 

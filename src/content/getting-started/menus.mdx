@@ -2,3 +2,20 @@
 title: Menus
 description: Learn about how to interact with Pages using WPGraphQL
 ---
+
+import { Button } from 'antd'
+import GraphiQL from '../../components/GraphiQL'
+
+## Menus
+
+Wow these are cool.
+
+<Button type="primary">Click Me!</Button>
+
+### How about this
+
+<GraphiQL
+  query="query getPosts($first: Int){posts(first: $first){edges{node{id}}}}"
+  variables={{ first: 1 }}
+  withDocs
+/>
