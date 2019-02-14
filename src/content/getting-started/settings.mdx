@@ -111,6 +111,7 @@ Site settings can also be queried by setting group name. Field names will be the
 Settings can be updated using GraphQL through a mutation. Custom settings would follow the allSettings naming conventions where the group name is prepended before the setting field name.
 
 <GraphiQL
+  withDocs={true}
   query="mutation updateSettings($input: UpdateSettingsInput!) {
     updateSettings(input: $input) {
       allSettings {
