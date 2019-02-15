@@ -3,12 +3,48 @@ title: Themes
 description: Learn about how to interact with Themes using WPGraphQL
 ---
 
+import GraphiQL from '../../components/GraphiQL';
+
 Themes are a core tenant in every WordPress site. WPGraphQL exposes native ways to interact with
 Themes via GraphQL.
 
 ## Queries
 
-`@todo: add examples`
+Query all themes on the site:
+
+<GraphiQL query="{
+	themes {
+    nodes {
+      id
+      author
+      authorUri
+      description
+      name
+      screenshot
+      slug
+      tags
+      themeUri
+      version
+    }
+  }
+}" />
+
+Query a specific theme by ID by replacing the ID below with an ID from the response above to query a specific theme:
+
+<GraphiQL query="{
+  theme(id: 1) {
+    id
+    author
+    authorUri
+    description
+    name
+    screenshot
+    slug
+    tags
+    themeUri
+    version
+  }
+}" />
 
 **also see:**
 - [https://github.com/wp-graphql/wp-graphql/issues/606](https://github.com/wp-graphql/wp-graphql/issues/606)
