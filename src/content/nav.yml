@@ -26,6 +26,8 @@
       title: Comments
     - id: settings
       title: Settings
+    - id: menus
+      title: Menus
     - id: plugins
       title: Plugins
     - id: themes
