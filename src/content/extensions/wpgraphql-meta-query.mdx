@@ -10,6 +10,40 @@ by meta fields.
 
 ## Examples
 
+```
+add_action( 'graphql_register_types', function() {
+
+  $post_types = WPGraphQL::$allowed_post_types;
+
+  if ( ! empty( $post_types ) && is_array( $post_types ) ) {
+    foreach ( $post_types as $post_type ) {
+			$post_type_object = get_post_type_object( $post_type );
+
+			if ($post_type === 'post') {
+				register_graphql_field( $post_type_object->graphql_single_name, 'blurb', [
+					'type' => 'String',
+					'description' => __( 'The blurb of the post', 'wp-graphql' ),
+					'resolve' => function( $post ) {
+						$blurb = get_post_meta( $post->ID, 'blurb', true );
+						return ! empty( $blurb ) ? $blurb : 'blue';
+					}
+				]);
+			}
+
+			if ($post_type === 'product') {
+				register_graphql_field( $post_type_object->graphql_single_name, 'price', [
+					'type' => 'String',
+					'description' => __( 'The price of the post', 'wp-graphql' ),
+					'resolve' => function( $post ) {
+						$price = get_post_meta( $post->ID, 'price', true );
+						return ! empty( $price ) ? $price : 'blue';
+					}
+				]);
+			}
+    }
+  }
+});
+```
 `@todo`
 
 ## Why isn't this in the core WPGraphQL plugin?
