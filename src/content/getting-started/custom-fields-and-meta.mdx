@@ -51,7 +51,7 @@ if there is no color returned, let’s just default to blue.
 
 ## Register fields to many types
 
-et’s say we wanted to register the same color field to ALL Post Types that are exposed in the Schema.
+Let’s say we wanted to register the same color field to ALL Post Types that are exposed in the Schema.
 
 We could to that like so:
 
@@ -98,6 +98,47 @@ Now, we can query the color field on ANY exposed Custom Post Type in our Schema.
   }
 }
 ```
+
+## Register multiple fields, speficying type
+
+If instead we want to register multiple fields (in this case blurb and price), but control which Post Types they are exposed to, we could do the following:
+
+```php
+add_action( 'graphql_register_types', function() {
+
+  $post_types = WPGraphQL::$allowed_post_types;
+
+  if ( ! empty( $post_types ) && is_array( $post_types ) ) {
+    foreach ( $post_types as $post_type ) {
+			$post_type_object = get_post_type_object( $post_type );
+
+			if ($post_type === 'post') {
+				register_graphql_field( $post_type_object->graphql_single_name, 'blurb', [
+					'type' => 'String',
+					'description' => __( 'The blurb of the post', 'wp-graphql' ),
+					'resolve' => function( $post ) {
+						$blurb = get_post_meta( $post->ID, 'blurb', true );
+						return ! empty( $blurb ) ? $blurb : 'blue';
+					}
+				]);
+			}
+
+			if ($post_type === 'product') {
+				register_graphql_field( $post_type_object->graphql_single_name, 'price', [
+					'type' => 'String',
+					'description' => __( 'The price of the post', 'wp-graphql' ),
+					'resolve' => function( $post ) {
+						$price = get_post_meta( $post->ID, 'price', true );
+						return ! empty( $price ) ? $price : 'blue';
+					}
+				]);
+			}
+    }
+  }
+});
+```
+
+This is very similar to the example above, but we only add a given field if the proper Post Type is currently being looped over.
 
 ## Resolving external (non-WordPress) data
 
