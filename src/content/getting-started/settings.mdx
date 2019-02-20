@@ -22,7 +22,7 @@ function register_my_setting() {
             'type' => 'string',
             'sanitize_callback' => 'sanitize_text_field',
             'default' => NULL,
-            'show_in_graphql' = true,
+            'show_in_graphql' => true,
             );
     register_setting( 'my_options_group', 'my_option_name', $args );
 }
