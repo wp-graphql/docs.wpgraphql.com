@@ -39,7 +39,7 @@ const DocTemplate = ({data, location}) => {
               </MDXRenderer>
             </MDXProvider>
             <Divider />
-            <a href={`https://github.com/wp-graphql/wpgraphql.com/tree/master/src/${data.mdx.fields.path}`} target="_blank" rel="noopener noreferrer" >
+            <a href={`https://github.com/wp-graphql/docs.wpgraphql.com/tree/master/src/${data.mdx.fields.path}`} target="_blank" rel="noopener noreferrer" >
             <Button icon='github' type='dashed'>Edit this page</Button>
             </a>
           </div>
