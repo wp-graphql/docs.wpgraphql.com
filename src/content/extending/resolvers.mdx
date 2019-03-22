@@ -3,4 +3,47 @@ title: GraphQL Resolvers
 description: Get an understanding of how GraphQL Resolvers work and how to customize their behavior
 ---
 
-`@todo: A common thing folks ask is how to override resolvers. Document this here!`
+Resolvers can be overridden by applying the `graphql_resolve_field` WordPress filter. Arguments available for the callback function are:
+
+
+* `$result`         The result of the field resolution.
+* `$source`         The source passed down the Resolve Tree.
+* `$args`           The args for the field.
+* `$context`        The AppContext passed down the ResolveTree.
+* `$info`           The ResolveInfo passed down the ResolveTree.
+* `$type_name`      The name of the type the fields belong to.
+* `$field_key`      The name of the field.
+* `$field`          The Field Definition for the resolving field.
+* `$field_resolver` The default field resolver.
+
+For example, the following code overrides the resolved value for the `title` field of all _Event_ posts.
+
+```
+add_filter(
+	'graphql_resolve_field', function( $result, $source, $args, $context, $info, $type_name, $field_key, $field, $field_resolver ) {
+		if ( strpos( $context->currentConnection, 'RootQueryToEventConnection' ) !== false
+			&& 'Event' === $type_name
+			&& 'title' === $field_key ) {
+			$result = 'My super awesome title override!';
+		}
+
+		return $result;
+	}, 20, 9
+);
+```
+
+Alternately, you can apply the `graphql_event_fields` filter to override a particular field of all post types.
+
+```
+add_filter(
+	'graphql_event_fields', function( $fields ) {
+		if ( isset( $fields['title'] ) ) {
+			$fields['title']['resolve'] = function( $post ) {
+				return 'YO!';
+			};
+		}
+
+		return $fields;
+	}, 20, 1
+);
+```
