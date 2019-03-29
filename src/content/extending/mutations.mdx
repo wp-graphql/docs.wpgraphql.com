@@ -13,4 +13,56 @@ Mutations in GraphQL signify that some data is changing. Other than the keyword 
 
 ## Extend existing mutations
 
-`@todo: Document how to do this`
+Extending mutation for post
+
+```
+		/**
+		 * Run an action after the additional data has been updated. This is a great spot to hook into to
+		 * update additional data related to postObjects, such as setting relationships, updating additional postmeta,
+		 * or sending emails to Kevin. . .whatever you need to do with the postObject.
+		 *
+		 * @param int $post_id The ID of the postObject being mutated
+		 * @param array $input The input for the mutation
+		 * @param \WP_Post_Type $post_type_object The Post Type Object for the type of post being mutated
+		 * @param string $mutation_name The name of the mutation (ex: create, update, delete)
+		 * @param AppContext $context The AppContext passed down to all resolvers
+		 * @param ResolveInfo $info The ResolveInfo passed down to all resolvers
+		 * @param string $intended_post_status The intended post_status the post should have according to the mutation input
+		 * @param string $default_post_status The default status posts should use if an intended status wasn't set
+		 */
+
+		add_action( 'graphql_post_object_mutation_update_additional_data', 'graphql_register_edit_mutation', 10, 5 );
+
+		function graphql_register_edit_mutation( $post_id, $input, $mutation_name, $context, $info ) {
+			// Consider other sanitization if necessary and validation such as which
+			// user role/capability should be able to insert this value, etc.
+			if ( ! empty( $input['example'] ) ) {
+				update_post_meta( $post_id, 'example', $input['example'] );
+			}
+		}
+```
+Extending mutation for user
+
+```
+		/**
+		 * Run an action after the additional data has been updated. This is a great spot to hook into to
+		 * update additional data related to users, such as setting relationships, updating additional usermeta,
+		 * or sending emails to Kevin... whatever you need to do with the userObject.
+		 *
+		 * @param int $user_id The ID of the user being mutated
+		 * @param array $input The input for the mutation
+		 * @param string $mutation_name The name of the mutation (ex: create, update, delete)
+		 * @param AppContext $context The AppContext passed down the resolve tree
+		 * @param ResolveInfo $info The ResolveInfo passed down the Resolve Tree
+		 */
+
+		add_action( 'graphql_user_object_mutation_update_additional_data', 'graphql_register_user_mutation', 10, 5 );
+
+		function graphql_register_user_mutation( $user_id, $input, $mutation_name, $context, $info ) {
+			if ( isset( $input['hobbies'] ) ) {
+				// Consider other sanitization if necessary and validation such as which
+				// user role/capability should be able to insert this value, etc.
+				update_user_meta( $user_id, 'hobbies', $input['hobbies'] );
+			}
+		}
+```
