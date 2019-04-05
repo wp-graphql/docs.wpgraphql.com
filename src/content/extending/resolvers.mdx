@@ -102,3 +102,34 @@ We get this response:
  }
 }
 ```
+
+## graphql_resolve_field filter
+
+Another option for overriding resolvers is using the `graphql_resolve_field` filter.
+
+This filter passes the following context:
+
+```php
+/**
+ * $result         The result of the field resolution.
+ * $source         The source passed down the Resolve Tree.
+ * $args           The args for the field.
+ * $context        The AppContext passed down the ResolveTree.
+ * $info           The ResolveInfo passed down the ResolveTree.
+ * $type_name      The name of the type the fields belong to.
+ * $field_key      The name of the field.
+ * $field          The Field Definition for the resolving field.
+ * $field_resolver The default field resolver.
+ */
+```
+
+We could override the result of the resolver this way using this filter like so:
+
+```php
+add_filter( 'graphql_resolve_field', function( $result, $source, $args, $context, $info, $type_name, $field_key, $field, $field_resolver ) {
+    if ( $type_name === 'RootQuery' && $field_key === 'hello' ) {
+        $result = 'goodbye';
+    }
+    return $result;
+}, 10, 9 );
+```

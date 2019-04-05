@@ -10,6 +10,42 @@ description: Learn how to register, deregister and filter GraphQL fields
 - **register_graphql_field()**
 - **deregister_graphql_field()**
 
+Register field for custom post
+
+```
+		register_graphql_field(
+			'Document',
+			'documentDateFrom',
+			[
+				'type'        => 'String',
+				'description' => __( 'Document validity from', 'wp-graphql' ),
+				'resolve'     => function( \WP_Post $post ) {
+					$document_date = get_post_meta( $post->ID, 'date_from', true );
+					return $document_date;
+				},
+			]
+		);
+
+```
+
+Register field for user
+
+```
+		$hobbies = [
+			'type'        => \WPGraphQL\Types::list_of( \WPGraphQL\Types::string() ),
+			'description' => __( 'Custom field for user mutations', 'your-textdomain' ),
+			'resolve'     => function( \WP_User $user ) {
+				$hobbies = get_user_meta( $user->ID, 'hobbies', true );
+				return ! empty( $hobbies ) ? $hobbies : [];
+			},
+		];
+
+		register_graphql_field( 'User', 'hobbies', $hobbies );
+		register_graphql_field( 'CreateUserInput', 'hobbies', $hobbies );
+		register_graphql_field( 'UpdateUserInput', 'hobbies', $hobbies );
+```
+
+
 ## Filtering Field Definitions
 
 `@todo: Document how to filter existing field definitions`
