@@ -78,7 +78,7 @@
       title: Contributing
     - id: testing
       title: Testing
-    - id: model
+    - id: model-layer
       tittle: Model Layer
 - title: Extensions
   directory: extensions
