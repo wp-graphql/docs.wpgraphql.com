@@ -78,6 +78,8 @@
       title: Contributing
     - id: testing
       title: Testing
+    - id: model
+      tittle: Model Layer
 - title: Extensions
   directory: extensions
   icon: api
@@ -100,4 +102,3 @@
       title: WPGraphiQL
     - id: wpgraphql-content-blocks
       title: WPGraphQL Content Blocks
-
