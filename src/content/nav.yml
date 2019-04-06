@@ -98,3 +98,5 @@
       title: Contributing
     - id: testing
       title: Testing
+    - id: model
+      tittle: Model Layer
