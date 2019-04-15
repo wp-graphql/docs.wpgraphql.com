@@ -432,7 +432,7 @@ ways to get an individual Post, but using the `postBy` query.
 
 <GraphiQL
   query="
-  query GET_POST( $postId: ID ) {
+  query GET_POST( $postId: Int ) {
     postBy( postId: $postId ) {
       id
       postId
