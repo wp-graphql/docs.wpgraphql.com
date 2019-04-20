@@ -1,10 +1,51 @@
 ---
-title: WPGraphQL for WooCommerce
+title: WPGraphQL WooCommerce (WooGraphQL)
 description: Expose WooCommerce in the WPGraphQL Schema
 ---
 
-# Coming Soon
+import GraphiQL from '../../components/GraphiQL'
+import Note from '../../components/Note'
 
-Right now, no official plugin exists (nor is in the works) that exposes WooCommerce to the WPGraphQL Schema.
+# WPGraphQL WooCommerce
+[WPGraphQL WooCommerce](https://github.com/kidunot89/wp-graphql-woocommerce) is a free, open-source WPGraphQL extension that adds WooCommerce functionality to the WPGraphQL API.
 
-Feel free to make use of the various [/docs/api-reference/types.mdx](APIs) to extend the Schema for your WooCommerce needs.
+<Note title="In Development" type="warning">
+This plugin is still in the early stages of the development and may contain many bugs or lack some functionality.
+Using in production is not recommended.
+</Note>
+
+# Getting Started
+1. Install & activate [WooCommerce](https://woocommerce.com/)
+2. Install & activate WPGraphQL.
+3. Clone or download the [extension](https://github.com/kidunot89/wp-graphql-woocommerce) & activate the **WP GraphQL WooCommerce** plugin
+
+# Playground
+This is a playground connected to the most stable release of the extension.
+<GraphiQL
+    endpoint='https://woographql.axistaylor.com/graphql'
+    query="
+    {
+      products {
+        nodes {
+            id
+            productId
+            name
+            type
+            price
+            variations {
+                nodes {
+                    id
+                    variationId
+                }
+            }
+        }
+      }
+    }
+    "
+    withDocs={true}
+    showJoyride={true}
+/>
+
+# Wanna help out?.
+A KickStarter was created to fund the development of the project. 
+**WP-GraphQL WooCommerce** :point_right: **[KickStarter](http://kck.st/2G268mx)**

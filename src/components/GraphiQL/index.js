@@ -30,9 +30,9 @@ class GraphiQLComponent extends Component {
 
   fetcher = ( graphQLParams ) => {
 
-    const { showQueryLog, showTracing } = this.props;
+    const { endpoint, showQueryLog, showTracing } = this.props;
 
-    return fetch('https://www.wpgraphql.com/graphql', {
+    return fetch( endpoint ? endpoint : 'https://www.wpgraphql.com/graphql', {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(graphQLParams),
