@@ -4,7 +4,10 @@ import { parse, print } from 'graphql'
 import uniqueId from 'react-html-id'
 import fetch from 'isomorphic-fetch'
 import classNames from 'classnames'
+import { get, map } from 'lodash'
+import v4 from 'uuid/v4'
 import Joyride from 'react-joyride'
+import ToggleButton from '../ToggleButton'
 import 'graphiql/graphiql.css'
 import './style.css'
 
@@ -12,6 +15,8 @@ import './style.css'
 class GraphiQLComponent extends Component {
   state = {
     render: false,
+    headers: {},
+    selected: {},
   }
 
   constructor() {
@@ -34,7 +39,10 @@ class GraphiQLComponent extends Component {
 
     return fetch( endpoint ? endpoint : 'https://www.wpgraphql.com/graphql', {
       method: 'post',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        ...this.state.headers,
+      },
       body: JSON.stringify(graphQLParams),
     })
       .then(response => response.json())
@@ -127,35 +135,100 @@ class GraphiQLComponent extends Component {
 
   }
 
+  setAuthHeader = (auth, key) => {
+    const { endpoint } = this.props;
+    fetch( endpoint ? endpoint : 'https://www.wpgraphql.com/graphql', {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        query: `
+          mutation ($clientId: String!, $user: String!, $pass: String!) {
+            login (input: {
+                clientMutationId: $clientId
+                username: $user
+                password: $pass
+            }) {
+              authToken
+            }
+          }
+        `,
+        variables: {
+          clientId: v4(),
+          user: auth[0],
+          pass: auth[1],
+        }
+      }),
+    })
+    .then(response => response.json())
+    .then((res) => {
+      const token = get(res, 'data.login.authToken')
+      if (token) {
+        this.setState({
+          headers: { Authorization: `Bearer ${token}` },
+          selected: { [key]: 'green' },
+        })
+      }
+    })
+    .catch(err => {
+      this.setState({ selected: { [key]: 'red' } })
+      console.error(err)
+    })
+
+    this.setState({ selected: { [key]: 'yellow' } })
+  }
 
   render() {
     const { render } = this.state
-    const { query, variables, response, withDocs = false, showJoyride = false } = this.props
+    const {
+      query,
+      variables,
+      response,
+      withDocs = false,
+      showJoyride = false,
+      authButtons = {},
+    } = this.props
     const formattedQuery = print(parse(query))
     const showDocs = true !== withDocs ? 'without-docs' : null
     const uniqid = this.nextUniqueId();
 
-    return render ?
-      <div
-        className={classNames('graphiql-wrapper', showDocs, uniqid)}
-        style={{
-          height: '500px',
-          width: '100%',
-          margin: '15px 0',
-          padding: '0',
-        }}
-      >
-        { showJoyride ? this.showJoyRide( uniqid ) : null }
-        <GraphiQL
-          fetcher={ this.fetcher }
-          query={formattedQuery}
-          variables={variables ? JSON.stringify(variables, null, 2) : null}
-          extensions={{
-            queryLog: true,
-            tracing: false
-          }}
-        />
-      </div> : 'GraphiQL Loading...'
+    return (
+      <React.Fragment>
+        {map(authButtons, (auth, key) => (
+          <ToggleButton
+            onClick={() => this.setAuthHeader(auth, key)}
+            state={this.state.selected[key]}
+            key={key}
+            label={`Login As ${key}`}
+          />
+        ))}
+        {
+          render
+          ? <div
+              className={classNames('graphiql-wrapper', showDocs, uniqid)}
+              style={{
+                height: '500px',
+                width: '100%',
+                margin: '15px 0',
+                padding: '0',
+              }}
+            >
+              { showJoyride ? this.showJoyRide( uniqid ) : null }
+              <GraphiQL
+                fetcher={ this.fetcher }
+                query={formattedQuery}
+                variables={variables ? JSON.stringify(variables, null, 2) : null}
+                extensions={{
+                  queryLog: true,
+                  tracing: false
+                }}
+              />
+            </div>
+          : 'GraphiQL Loading...'
+        }
+      </React.Fragment>
+    )
   }
 }
 
