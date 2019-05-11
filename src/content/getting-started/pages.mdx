@@ -432,7 +432,7 @@ ways to get an individual Page, but using the `pageBy` query.
 
 <GraphiQL
   query="
-  query GET_PAGE( $pageId: ID ) {
+  query GET_PAGE( $pageId: Int ) {
     pageBy( pageId: $pageId ) {
       id
       pageId
