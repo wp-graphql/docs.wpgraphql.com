@@ -32,11 +32,17 @@ comment children (replies).
             nodes {
               ...CommentFields
               replies: children {
-                ...CommentFields
-                replies: children {
+                nodes {
                   ...CommentFields
                   replies: children {
-                    ...CommentFields
+                    nodes {
+                      ...CommentFields
+                      replies: children {
+                        nodes {
+                          ...CommentFields
+                        }
+                      }
+                    }
                   }
                 }
               }
