@@ -16,6 +16,10 @@ This is an example of registering a new “docs” post_type and enabling GraphQ
 ```php
 add_action( 'init', function() {
    register_post_type( 'docs', [
+      'show_ui' => true,
+      'labels'  => [
+	'menu_name' => 'Docs'
+      ],
       'show_in_graphql' => true,
       'hierarchical' => true,
       'graphql_single_name' => 'Document',
