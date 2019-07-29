@@ -18,6 +18,9 @@ Custom Post Type and enabling GraphQL support.
 ```php
 add_action('init', function() {
   register_taxonomy( 'doc_tag', 'docs', [
+    'labels'  => [
+	'menu_name' => 'Document Tags'
+    ],
     'show_in_graphql' => true,
     'graphql_single_name' => 'DocumentTag',
     'graphql_plural_name' => 'DocumentTags',
