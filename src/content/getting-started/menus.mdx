@@ -13,21 +13,66 @@ The `menus` query is the only query that will return all of the menus on your si
 
 ### Menus
 
-<GraphiQL query="{
-  menus {
-    nodes {
-      id
-      menuId
-      menuItems {
-        edges {
-          node {
+<GraphiQL query='
+    {
+      menus {
+        nodes {
+          id
+          menuId
+          menuItems {
+            edges {
+              node {
+                id
+                menuItemId
+                title
+                url
+                connectedObject {
+                  __typename
+                }
+                cssClasses
+                description
+                label
+                linkRelationship
+                target
+              }
+            }
+            nodes {
+              id
+              menuItemId
+              title
+              url
+              connectedObject {
+                __typename
+              }
+              cssClasses
+              description
+              label
+              linkRelationship
+              target
+            }
+          }
+        }
+      }
+    }' />
+
+After running the `menus` query grab one of the IDs in the response and use it in the other queries below.
+
+### Menu
+
+<GraphiQL withDocs={true} query='
+  query GET_MENU( $id: ID! ){
+      menu(id: $id) {
+        count
+        id
+        menuId
+        name
+        slug
+        menuItems {
+          nodes {
             id
             menuItemId
             title
             url
-            connectedObject {
-              __typename
-            }
             cssClasses
             description
             label
@@ -35,71 +80,43 @@ The `menus` query is the only query that will return all of the menus on your si
             target
           }
         }
-        nodes {
-          id
-          menuItemId
-          title
-          url
-          connectedObject {
-            __typename
-          }
-          cssClasses
-          description
-          label
-          linkRelationship
-          target
-        }
       }
+  }'
+   variables={
+    {
+        id: 'TWVudTo5'
     }
-  }}" />
-
-After running the `menus` query grab one of the IDs in the response and use it in the other queries below.
-
-### Menu
-
-<GraphiQL withDocs={true} query="{
-  menu(id: \"TWVudTo5\") {
-    count
-    id
-    menuId
-    name
-    slug
-    menuItems {
-      nodes {
-        id
-        menuItemId
-        title
-        url
-        cssClasses
-        description
-        label
-        linkRelationship
-        target
-      }
-    }
-  }}" />
+   }
+   />
 
 
 
 ### Menu Item
 
-<GraphiQL withDocs={true} query="{
-  menuItem({id: \"bmF2X21lbnVfaXRlbToxMDQ2\"}) {
-    id
-    menuItemId
-    title
-    url
-    connectedObject
-    cssClasses
-    description
-    label
-    linkRelationship
-    target
-  }}" />
+ <GraphiQL withDocs={true} query='
+     query GET_MENU_ITEM( $id: ID! ){
+       menuItem( id: $id ) {
+         id
+         menuItemId
+         title
+         url
+         connectedObject {
+            __typename
+         }
+         cssClasses
+         description
+         label
+         linkRelationship
+         target
+       }}'
+    variables={{
+     id: 'bmF2X21lbnVfaXRlbToxMDQ2'
+    }}
+    />
 
 ### Menu Items
 
-<GraphiQL withDocs={true} query="{
+<GraphiQL withDocs={true} query='{
   menuItems(where: {location: PRIMARY}){
     edges {
       node {
@@ -131,4 +148,4 @@ After running the `menus` query grab one of the IDs in the response and use it i
       linkRelationship
       target
     }
-  }}" />
+  }}' />
