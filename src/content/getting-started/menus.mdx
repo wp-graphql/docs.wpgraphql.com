@@ -58,23 +58,24 @@ After running the `menus` query grab one of the IDs in the response and use it i
 ### Menu
 
 <GraphiQL withDocs={true} query="{
-  menu(where: {id: "TWVudTo5"}) {
+  menu(id: "TWVudTo5") {
     count
     id
     menuId
     name
     slug
     menuItems {
-      id
-      menuItemId
-      title
-      url
-      connectedObject
-      cssClasses
-      description
-      label
-      linkRelationship
-      target
+      nodes {
+        id
+        menuItemId
+        title
+        url
+        cssClasses
+        description
+        label
+        linkRelationship
+        target
+      }
     }
   }}" />
 
