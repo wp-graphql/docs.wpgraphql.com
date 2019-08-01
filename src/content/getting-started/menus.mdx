@@ -5,7 +5,7 @@ description: Learn about how to interact with Pages using WPGraphQL
 
 import GraphiQL from '../../components/GraphiQL'
 
-There are various points of entry for menus and their items. 
+There are various points of entry for menus and their items.
 
 ## Queries
 
@@ -58,7 +58,7 @@ After running the `menus` query grab one of the IDs in the response and use it i
 ### Menu
 
 <GraphiQL withDocs={true} query="{
-  menu(id: "TWVudTo5") {
+  menu(id: \"TWVudTo5\") {
     count
     id
     menuId
@@ -84,7 +84,7 @@ After running the `menus` query grab one of the IDs in the response and use it i
 ### Menu Item
 
 <GraphiQL withDocs={true} query="{
-  menuItem({id: "bmF2X21lbnVfaXRlbToxMDQ2"}) {
+  menuItem({id: \"bmF2X21lbnVfaXRlbToxMDQ2\"}) {
     id
     menuItemId
     title
@@ -103,7 +103,7 @@ After running the `menus` query grab one of the IDs in the response and use it i
   menuItems(where: {location: PRIMARY}){
     edges {
       node {
-        id 
+        id
         menuItemId
         title
         url
