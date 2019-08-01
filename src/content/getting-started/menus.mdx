@@ -58,7 +58,7 @@ After running the `menus` query grab one of the IDs in the response and use it i
 ### Menu
 
 <GraphiQL withDocs={true} query="{
-  menu(where: {id: 1}) {
+  menu(where: {id: "TWVudTo5"}) {
     count
     id
     menuId
@@ -83,7 +83,7 @@ After running the `menus` query grab one of the IDs in the response and use it i
 ### Menu Item
 
 <GraphiQL withDocs={true} query="{
-  menuItem(where: {id: 1}) {
+  menuItem({id: "bmF2X21lbnVfaXRlbToxMDQ2"}) {
     id
     menuItemId
     title
@@ -99,10 +99,10 @@ After running the `menus` query grab one of the IDs in the response and use it i
 ### Menu Items
 
 <GraphiQL withDocs={true} query="{
-  menuItems(where: {id: 1}){
+  menuItems(where: {location: PRIMARY}){
     edges {
       node {
-        id
+        id 
         menuItemId
         title
         url
