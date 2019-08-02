@@ -122,15 +122,15 @@ WordPress core doesn't store much contextual data in regards to relationships be
 
 One example of contextual data I've experienced in WordPress is "Custom Captions". 
 
-The idea is that when a media item is used from the media library, the post it's being used on could set a "custom caption" that users would see when that image wad displayed on that Post. But if the image were displayed on another Post, that post could also set a "custom caption". 
+The idea is that when a media item is used from the media library, the post it's being used on could set a "custom caption" that users would see when that image was displayed on that Post. But if the image were displayed on another Post, that post could also set a "custom caption". 
 
-So, we might have 1 Image, connected to 2 or more Posts, and a different caption for each connection between the Image and Post. 
+So, we might have one Image connected to two or more Posts, and a different caption for each connection between the Image and Post. 
 
 We needed a way to expose this contextual data in a way that a caching client could make use of. 
 
 If we were to expose this caption as a property of the Image, this would cause problems with any caching client. 
 
-A caching client will cache the Image based on it's ID, and will cache fields against that ID. If the `caption` field were "Custom Caption 1" when queried in connection to Post 1, and "Custom Caption 2" when queried in connection to Post 2, then whichever "connection" was queried last would write to the cache last and we'd have a bug where the contextual caption wouldn't be displayed properly. 
+A caching client will cache the Image based on its ID, and will cache fields against that ID. If the `caption` field were "Custom Caption 1" when queried in connection to Post 1, and "Custom Caption 2" when queried in connection to Post 2, then whichever "connection" was queried last would write to the cache last and we'd have a bug where the contextual caption wouldn't be displayed properly. 
 
 ## Relay Spec for Connections
 
