@@ -19,7 +19,7 @@ Register field for custom post
 			[
 				'type'        => 'String',
 				'description' => __( 'Document validity from', 'wp-graphql' ),
-				'resolve'     => function( \WP_Post $post ) {
+				'resolve'     => function( $post ) {
 					$document_date = get_post_meta( $post->ID, 'date_from', true );
 					return $document_date;
 				},
@@ -34,7 +34,7 @@ Register field for user
 		$hobbies = [
 			'type'        => \WPGraphQL\Types::list_of( \WPGraphQL\Types::string() ),
 			'description' => __( 'Custom field for user mutations', 'your-textdomain' ),
-			'resolve'     => function( \WP_User $user ) {
+			'resolve'     => function( $user ) {
 				$hobbies = get_user_meta( $user->userId, 'hobbies', true );
 				return ! empty( $hobbies ) ? $hobbies : [];
 			},
