@@ -62,14 +62,19 @@ In order for the `/graphql` endpoint to work, **you must have
 [pretty permalinks](https://wpgraphql.com/docs/getting-started/install-and-activate#flush-permalinks)
 enabled** and any permalink structure other than the default WordPress permalink structure.
 
-Once the plugin is active, your site should have a `yoursite.com/graphql` endpoint and you the
+Once the plugin is active, your site should have a `example.com/graphql` endpoint and you the
 expected response is a JSON payload like so:
 
-![Screenshot showing the expected response for visiting the GraphQL endpoint in a browser with no
-query defined](../../images/activate-wpgraphql-expected-payload.png)
-
-_Screenshot showing the expected response for visiting the GraphQL endpoint in a browser with no
-query defined_
+```graphql
+{
+  "errors": [
+    {
+      "message": "GraphQL Request must include at least one of those two parameters: \"query\" or \"queryId\"",
+      "category": "request"
+    }
+  ]
+}
+```
 
 ## GraphQL Tools and IDEs
 
