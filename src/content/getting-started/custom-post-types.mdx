@@ -58,15 +58,14 @@ new Type shows up in the Schema
 This example shows how to query a single document by it’s URI.
 
 <Note title="Fragments">
-This example also showcases some
-<a href="/docs/getting-started/intro-to-graphql/">features of GraphQL
+This example also showcases some <a href="/getting-started/intro-to-graphql/">features of GraphQL
 queries</a> such as fragments, arguments, operation type and operation name.
 </Note>
 <br/>
 
 ```json
 query GetDocument {
-  documentBy(uri: "docs/getting-started/custom-post-types-taxonomies/") {
+  documentBy(uri: "/getting-started/custom-post-types-taxonomies/") {
     title(format: RAW)
     link
     slug
@@ -79,8 +78,7 @@ This example shows how to query a collection of documents, and their child docum
 (available for hierarchical Post Types).
 
 <Note title="Fragments">
-This example also showcases some
-<a href="/docs/getting-started/intro-to-graphql/">features of GraphQL
+This example also showcases some <a href="/getting-started/intro-to-graphql/">features of GraphQL
 queries</a> such as fragments, arguments, operation type and operation name.
 </Note>
 <br/>
