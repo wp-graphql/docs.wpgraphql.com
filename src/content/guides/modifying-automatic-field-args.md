@@ -8,6 +8,8 @@ Deregistering a field is as simple as `deregister_graphql_field( $type_name, $fi
 
 Once the automatically registered field has been deregistered, it can be registered again with the desired args. In the below example, we are only supporting the _slug_ arg, and are adding a _password_ arg.
 
+For a more complete example, and a great starting point, take a look at the core `By` function at [src/Type/Object/RootQuery.php](https://github.com/wp-graphql/wp-graphql/blob/develop/src/Type/Object/RootQuery.php#L209)
+
 ```
 register_graphql_field(
 	'RootQuery', 'fooBarBy', [
