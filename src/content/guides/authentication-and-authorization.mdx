@@ -14,9 +14,9 @@ queries can be processed Async (in environments that support it).
 
 Other than that, Queries and Mutations are the same, they’re both just strings that map to functions.
 
-Now that we’re clear on Queries v. Mutations (both are just maps to functions), Auth is left up to
-the application layer, not the GraphQL API layer, although some mechanisms in GraphQL can help
-facilitate Auth.
+Now that we’re clear on Queries vs. Mutations (both are just maps to functions), authentication & 
+authorization is left up to the application layer, not the GraphQL API layer, although some mechanisms 
+in GraphQL can help facilitate these processes.
 
 ## Authentication & Authorization
 - **Authentication**: the process of verifying who you are (logging in)
@@ -28,7 +28,7 @@ view/change private data)
 Since WPGraphQL is a WordPress plugin that adheres largely to common WordPress practices, there are
 many ways to make authenticated WPGraphQL requests.
 
-For remote HTTP requests to the ``/graphql` endpoint, existing authentication plugins _should_ work
+For remote HTTP requests to the `/graphql` endpoint, existing authentication plugins _should_ work
 fine. These plugins make use of sending data in the Headers of requests and validating the
 credentials and setting the user before execution of the API request is returned:
 
@@ -42,7 +42,7 @@ existing Auth nonce as seen in action [here](https://github.com/wp-graphql/wp-gr
 For non-remote requests (PHP function calls), if the context of the request is already authenticated,
 such as an Admin page in the WordPress dashboard, existing WordPress authentication can be used,
 taking advantage of the existing session. For example, if you wanted to use a GraphQL query to
-populate a dashboard page, you could send your query to the do_graphql_request( $query ) function,
+populate a dashboard page, you could send your query to the `do_graphql_request( $query )` function,
 and since the request is already authenticated, GraphQL will execute with the current user set,
 and will resolve fields that the users has permission to resolve.
 
@@ -55,11 +55,11 @@ The mutations that WPGraphQL provide out of the box attempt to adhere to best pr
 to respecting user roles and capabilities. Whether the mutation is creating, updating or deleting
 content, WPGraphQL checks for capabilities before executing the mutation.
 
-For example, any mutation that would create a post will first check to make sure the current user
-has proper capabilities to create a post.
+For example, any mutation that would create a `post` will first check to make sure the current user
+has proper capabilities to create a `post`.
 
 Mutations are not alone when it comes to checking capabilities. Some queries expose potentially
-sensitive data, such as the email address field in generalSettings. By default, this field will
+sensitive data, such as the email address field in `generalSettings`. By default, this field will
 only resolve if the request is authenticated, meaning that the value of the email address is only
 exposed to logged in users.
 
