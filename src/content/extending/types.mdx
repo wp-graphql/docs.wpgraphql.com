@@ -334,8 +334,8 @@ below the registration for those types, we can add the following:
 ```php
 register_graphql_union_type( 'PetUnion', [
   'types'       => [
-    \WPGraphQL\TypeRegistry::get_type( 'Dog' ),
-    \WPGraphQL\TypeRegistry::get_type( 'Cat' )
+    \\WPGraphQL\\TypeRegistry::get_type( 'Dog' ),
+    \\WPGraphQL\\TypeRegistry::get_type( 'Cat' )
   ],
   'resolveType' => function( $pet ) {
     // Here we receive the object or array that's being resolved by the field
@@ -343,10 +343,10 @@ register_graphql_union_type( 'PetUnion', [
     $type = null;
     switch( $pet['type'] ) {
       case 'dog':
-        $type = \WPGraphQL\TypeRegistry::get_type( 'Dog' );
+        $type = \\WPGraphQL\\TypeRegistry::get_type( 'Dog' );
         break;
       case 'cat':
-        $type = \WPGraphQL\TypeRegistry::get_type( 'Dog' );
+        $type = \\WPGraphQL\\TypeRegistry::get_type( 'Dog' );
         break;
     }
     return $type;
