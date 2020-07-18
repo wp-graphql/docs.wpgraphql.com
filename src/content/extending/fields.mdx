@@ -3,12 +3,24 @@ title: GraphQL Fields API Reference
 description: Learn how to register, deregister and filter GraphQL fields
 ---
 
-## Register Fields to the Schema
+## Register/Deregister Fields to the Schema
 
 `@todo: Document the registration API`
 
 - **register_graphql_field()**
 - **deregister_graphql_field()**
+
+To deregister, or remove, a field from the schema, simply call [`deregister_graphql_field( $type_name, $field_name )`](https://github.com/wp-graphql/wp-graphql/blob/develop/access-functions.php#L164). For example, to deregister the automatically registered _By_ root field for the custom post type _fooBar_:
+
+```
+add_action(
+	'graphql_register_types', function () {
+		deregister_graphql_field( 'RootQuery', 'fooBarBy' );
+	}
+);
+
+```
+
 
 Register field for custom post
 
